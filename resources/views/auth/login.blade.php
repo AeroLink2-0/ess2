@@ -21,7 +21,7 @@
                                 <form method="POST" action="{{ route('login') }}">
                                     @csrf
                                     <div class="form-group row">
-                                        <label for="name" class="col-form-label">{{ __('Username:') }}</label>
+                                        <label for="name" class="col-form-label">{{ __('Username') }}</label>
                                             <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}">
                                             @error('name')
                                                 <span class="invalid-feedback" role="alert">
@@ -31,7 +31,7 @@
                                     </div>
 
                                     <div class="form-group row">
-                                        <label for="password" class="col-form-label">{{ __('Password:') }}</label>
+                                        <label for="password" class="col-form-label">{{ __('Password') }}</label>
                                             <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
                                             @error('password')
                                                 <span class="invalid-feedback" role="alert">
@@ -41,7 +41,7 @@
                                     </div>
 
                                     <div class="form-group">
-                                            <button type="submit" class="btn btn-primary form-control">
+                                            <button type="submit" class="btn btn-success form-control">
                                                 {{ __('Login') }}
                                             </button>
                                             @if (Route::has('password.request'))

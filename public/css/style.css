@@ -57,7 +57,7 @@
   padding: 0;
 }
 
-.login-form {
+.login-form, .password-form {
   overflow-y: hidden;
   font-family: Lato-Regular;
   z-index: 20;
@@ -69,23 +69,23 @@
   right: 0;
 }
 
-.login-form .card {
+.login-form .card, .password-form .card {
   margin: 0 auto;
   margin-top: 40px;
-  width: 40%;
+  width: 50%;
 }
 
-.login-form .card-header {
+.login-form .card-header, .password-form .card-header {
   background-color: #f2f2f2;
 }
 
-.login-form .card-header img {
+.login-form .card-header img, .password-form .card-header img {
   width: 60px;
   height: 60px;
   float: left;
 }
 
-.login-form .card-header h2 {
+.login-form .card-header h2, .password-form .card-header h2 {
   float: left;
   padding: 5px;
   line-height: 25px;
@@ -93,27 +93,35 @@
   font-size: 35px;
 }
 
-.login-form .card-header span {
+.login-form .card-header span, .password-form .card-header span {
   font-family: Raleway-Light;
   font-size: 20px;
 }
 
-.login-form h1, .login-form p, .login-form b {
+.login-form h1, .login-form p, .login-form b, .password-form h1, .password-form p, .password-form b {
   color: #333;
   font-family: Lato-Regular;
 }
 
-#login-body {
+#login-body, #reset-password {
   background-image: url("/uploads/hr.jpg");
+  background-position: center;
+  background-size: cover;
   width: 100%;
   height: 100vh;
-  background-size: cover;
+  overflow: hidden !important;
 }
 
 .overlay {
-  background-color: black;
-  opacity: .3;
-  position: absolute;
+  width: 100%;
+  height: 100vh;
   z-index: 5;
+  background: #11998e;
+  /* fallback for old browsers */
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: -webkit-gradient(linear, left top, right top, from(#11998e), to(#38ef7d));
+  background: linear-gradient(to right, #11998e, #38ef7d);
+  position: absolute;
+  opacity: .8;
 }
 /*# sourceMappingURL=style.css.map */
