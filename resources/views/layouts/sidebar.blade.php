@@ -9,7 +9,7 @@
                         <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
                     </li>
                 </ul>
-
+ 
             </nav>
             <!-- /.navbar -->
             <aside class="main-sidebar sidebar-dark-primary elevation-4">
@@ -48,34 +48,18 @@
                             </a>
                         </li>
                         <li class="nav-item has-treeview">
+                            <a href="{{ url('/myinfo/')}}" class="nav-link">
+                                <i class="nav-icon fas fa-money"></i>
+                                <p>
+                                    Personal Information 
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item has-treeview">
                             <a href="{{ url('/admin/projects')}}" class="nav-link">
                                 <i class="nav-icon fas fa-money"></i>
                                 <p>
                                     Payroll
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item has-treeview">
-                            <a href="{{ url('/admin/skills')}}" class="nav-link">
-                                <i class="nav-icon fa fa-wrench"></i>
-                                <p>
-                                    Skills
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item has-treeview">
-                            <a href="{{ url('/admin/we/')}}" class="nav-link">
-                                <i class="nav-icon fa fa-briefcase"></i>
-                                <p>
-                                    Work Experience
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item has-treeview">
-                            <a href="{{ url('/admin/blog/')}}" class="nav-link">
-                                <i class="nav-icon fa fa-book"></i>
-                                <p>
-                                    Blog
                                 </p>
                             </a>
                         </li>
