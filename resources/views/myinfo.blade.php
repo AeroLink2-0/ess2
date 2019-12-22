@@ -14,7 +14,7 @@
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Projects</li>
+              <li class="breadcrumb-item active">Personal Information</li>
             </ol>
           </div>
         </div>
@@ -87,9 +87,10 @@
             <div class="card">
               <div class="card-header p-2">
                 <ul class="nav nav-pills">
-                  <li class="nav-item"><a class="nav-link active" href="#activity" data-toggle="tab">Activity</a></li>
-                  <li class="nav-item"><a class="nav-link" href="#timeline" data-toggle="tab">Timeline</a></li>
-                  <li class="nav-item"><a class="nav-link" href="#settings" data-toggle="tab">Settings</a></li>
+                  <li class="nav-item"><a class="nav-link active" href="#activity" data-toggle="tab">Other Personal Information</a></li>
+                  <li class="nav-item"><a class="nav-link" href="#timeline" data-toggle="tab">Employment Details</a></li>
+                  <li class="nav-item"><a class="nav-link" href="#settings" data-toggle="tab">Work Experience</a></li>
+                  <li class="nav-item"><a class="nav-link" href="#settings" data-toggle="tab">Training/Seminars Attended</a></li>
                 </ul>
               </div><!-- /.card-header -->
               <div class="card-body">
