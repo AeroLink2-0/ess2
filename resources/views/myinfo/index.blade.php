@@ -44,6 +44,9 @@
                 </p>
 
                 <ul class="list-group list-group-unbordered mb-3">
+                   <li class="list-group-item">
+                    <b>Employee No.</b> <a class="float-right">{{ $myinfo->employee_id }}</a>
+                  </li>
                   <li class="list-group-item">
                     <b>Birthday</b> <a class="float-right">{{ $myinfo->birthday }}</a>
                   </li>
@@ -87,15 +90,15 @@
             <div class="card">
               <div class="card-header p-2">
                 <ul class="nav nav-pills">
-                  <li class="nav-item"><a class="nav-link active" href="#activity" data-toggle="tab">Other Personal Information</a></li>
-                  <li class="nav-item"><a class="nav-link" href="#timeline" data-toggle="tab">Employment Details</a></li>
-                  <li class="nav-item"><a class="nav-link" href="#settings" data-toggle="tab">Work Experience</a></li>
-                  <li class="nav-item"><a class="nav-link" href="#settings" data-toggle="tab">Training/Seminars Attended</a></li>
+                  <li class="nav-item"><a class="nav-link active" href="#info" data-toggle="tab">Other Personal Information</a></li>
+                  <li class="nav-item"><a class="nav-link" href="#employment_details" data-toggle="tab">Employment Details</a></li>
+                  <li class="nav-item"><a class="nav-link" href="#trainings" data-toggle="tab">Training/Seminars Attended</a></li>
+                  <li class="nav-item"><a class="nav-link" href="#IDs" data-toggle="tab">IDs</a></li>
                 </ul>
               </div><!-- /.card-header -->
               <div class="card-body">
                 <div class="tab-content">
-                  <div class="active tab-pane" id="activity">
+                  <div class="active tab-pane" id="info">
                     <b>Address</b>
                       <div class="row">
                         <div class="col-md-3 mt-4">
@@ -141,6 +144,7 @@
                                     <th>School</th>
                                     <th>Course</th>
                                     <th>School Year</th>
+                                    <th>Honors/Awards</th>
                                     <th>Year Graduated</th>
                                   </tr>
                                 </thead>
@@ -151,6 +155,15 @@
                                     <td>{{$emp_educ_bg->name_of_school }}</td>
                                     <td><?php echo ($emp_educ_bg->course) ?  $emp_educ_bg->course : '-' ?></td>
                                     <td>{{$emp_educ_bg->date_from }} - {{$emp_educ_bg->date_to }}</td>
+                                    <td>
+                                      @if(count($emp_educ_bg->academic_honors) > 0)
+                                        @foreach($emp_educ_bg->academic_honors as $honors)
+                                          {{$honors->honors}}
+                                        @endforeach
+                                      @else
+                                        <p>-</p>
+                                      @endif
+                                    </td>
                                     <td>{{$emp_educ_bg->year_graduated }}</td>
                                   </tr>
                                   @endforeach
@@ -183,157 +196,147 @@
                               {{$myinfo->country}}
                           </div>
                           @endif
-                      </div>
+                      </div><hr>
+                        <b>Family Background</b>
+                        <div class="row">
+                          <div class="col-md-6 mt-4">
+                            <h6>Spouse Name</h6>
+                            <?php echo ($myinfo->emp_family_background) ?  $myinfo->emp_family_background->spouse_name : '-' ?>
+                          </div>
+                          <div class="col-md-6 mt-4">
+                            <h6>Spouse Occupation</h6>
+                            <?php echo ($myinfo->emp_family_background) ?  $myinfo->emp_family_background->spouse_occupation: '-' ?>
+                          </div>
+                          <div class="col-md-6 mt-4">
+                            <h6>Father Name</h6>
+                            <?php echo ($myinfo->emp_family_background) ?  $myinfo->emp_family_background->father_name : '-' ?>
+                          </div>
+                          <div class="col-md-6 mt-4">
+                            <h6>Father Occupation</h6>
+                            <?php echo ($myinfo->emp_family_background) ?  $myinfo->emp_family_background->father_occupation: '-' ?>
+                          </div>
+                          <div class="col-md-6 mt-4">
+                            <h6>Mother Name</h6>
+                            <?php echo ($myinfo->emp_family_background) ?  $myinfo->emp_family_background->mother_name : '-' ?>
+                          </div>
+                          <div class="col-md-6 mt-4">
+                            <h6>Mother Occupation</h6>
+                            <?php echo ($myinfo->emp_family_background) ?  $myinfo->emp_family_background->mother_occupation: '-' ?>
+                          </div>
+                          <div class="col-md-3 mt-4">
+                            <h6>Guardian Name</h6>
+                            <?php echo ($myinfo->emp_family_background) ?  $myinfo->emp_family_background->guardian_name : '-' ?>
+                          </div>
+                          <div class="col-md-3 mt-4">
+                            <h6>Guardian Occupation</h6>
+                            <?php echo ($myinfo->emp_family_background) ?  $myinfo->emp_family_background->guardian_occupation: '-' ?>
+                          </div>
+                          <div class="col-md-3 mt-4">
+                            <h6>Guardian Contact Number</h6>
+                            <?php echo ($myinfo->emp_family_background) ?  $myinfo->emp_family_background->guardian_cno: '-' ?>
+                          </div>
+                        </div><hr>
+                        <b>In Case of Emergency</b>
+                          <div class="row">
+                            <div class="col-md-3 mt-4">
+                              <h6>Complete Name</h6>
+                              <?php echo ($myinfo->emp_family_background->incase_of_emergency) ?  $myinfo->emp_family_background->incase_of_emergency->complete_name: '-' ?>
+                            </div>
+                            <div class="col-md-3 mt-4">
+                              <h6>Contact Number</h6>
+                              <?php echo ($myinfo->emp_family_background->incase_of_emergency) ?  $myinfo->emp_family_background->incase_of_emergency->contact_number: '-' ?>
+                            </div>
+                            <div class="col-md-3 mt-4">
+                              <h6>Relationship</h6>
+                              <?php echo ($myinfo->emp_family_background->incase_of_emergency) ?  $myinfo->emp_family_background->incase_of_emergency->relationship : '-' ?>
+                            </div>
+                          </div>
                   </div>
                   <!-- /.tab-pane -->
-                  <div class="tab-pane" id="timeline">
-                    <!-- The timeline -->
-                    <div class="timeline timeline-inverse">
-                      <!-- timeline time label -->
-                      <div class="time-label">
-                        <span class="bg-danger">
-                          10 Feb. 2014
-                        </span>
+                  <div class="tab-pane" id="employment_details">
+                    <b>Aerolink Company</b>
+                    <div class="row">
+                      <div class="col-md-4 mt-4">
+                        <h6>Date of Hired</h6>
+                        {{ $myinfo->emp_employment_details->date_of_hired()}}
                       </div>
-                      <!-- /.timeline-label -->
-                      <!-- timeline item -->
-                      <div>
-                        <i class="fas fa-envelope bg-primary"></i>
-
-                        <div class="timeline-item">
-                          <span class="time"><i class="far fa-clock"></i> 12:05</span>
-
-                          <h3 class="timeline-header"><a href="#">Support Team</a> sent you an email</h3>
-
-                          <div class="timeline-body">
-                            Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles,
-                            weebly ning heekya handango imeem plugg dopplr jibjab, movity
-                            jajah plickers sifteo edmodo ifttt zimbra. Babblely odeo kaboodle
-                            quora plaxo ideeli hulu weebly balihoo...
-                          </div>
-                          <div class="timeline-footer">
-                            <a href="#" class="btn btn-primary btn-sm">Read more</a>
-                            <a href="#" class="btn btn-danger btn-sm">Delete</a>
-                          </div>
+                      <div class="col-md-4 mt-4">
+                        <h6>Employee Type</h6>
+                        {{ $myinfo->emp_employment_details->employee_type->employee_type}}
+                      </div>
+                      <div class="col-md-4 mt-4">
+                        <h6>Job Title</h6>
+                        {{ $myinfo->emp_employment_details->emp_position->position}}
+                      </div>
+                      <div class="col-md-4 mt-4">
+                        <h6>Job Category</h6>
+                        {{ $myinfo->emp_employment_details->emp_position->job_category->job_category}}
+                      </div>
+                      <div class="col-md-4 mt-4">
+                        <h6>Department</h6>
+                        {{ $myinfo->emp_employment_details->emp_position->department->department}}
+                      </div>
+                      <div class="col-md-4 mt-4">
+                        <h6>Salary</h6>
+                        {{ $myinfo->emp_employment_details->salary}}
+                      </div>
+                    </div><hr>
+                    <div class="row">
+                      <b>Work Experience</b>
+                      <div class="col-md-12">
+                        <div class="table-responsive-sm">
+                          <table id="work_experience" class="table table-bordered table-hover">
+                            <thead>
+                            <tr>
+                              <th>Position</th>
+                              <th>Department/Office/Division</th>
+                              <th>Company</th>
+                              <th>Salary</th>
+                              <th>Employee Type</th>
+                              <th>Duration</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                              @foreach($myinfo->emp_employment_details->work_experience as $work_experience)
+                                <tr>
+                                  <td>{{$work_experience->position }}</td>
+                                  <td>{{$work_experience->department }}</td>  
+                                  <td>{{$work_experience->company }}</td>
+                                  <td>{{$work_experience->salary }}</td>
+                                  <td>{{$work_experience->employee_type->employee_type }}</td>
+                                  <td>{{$work_experience->getDuration() }}</td>
+                                </tr>
+                              @endforeach
+                            </tbody>
+                          </table>
                         </div>
                       </div>
-                      <!-- END timeline item -->
-                      <!-- timeline item -->
-                      <div>
-                        <i class="fas fa-user bg-info"></i>
+                    </div>   
+                  </div>              
 
-                        <div class="timeline-item">
-                          <span class="time"><i class="far fa-clock"></i> 5 mins ago</span>
-
-                          <h3 class="timeline-header border-0"><a href="#">Sarah Young</a> accepted your friend request
-                          </h3>
+                  <div class="tab-pane" id="trainings">
+                      <div class="col-md-12">
+                        <div class="table-responsive-sm">
+                          <table id="work_experience" class="table table-bordered table-hover">
+                            <thead>
+                            <tr>
+                              <th>Title of Training</th>
+                              <th>Duration</th>
+                              <th>Conducted by</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                              @foreach($myinfo->emp_trainings as $emp_trainings)
+                                <tr>
+                                  <td>{{$emp_trainings->title_of_training }}</td>
+                                  <td>{{$emp_trainings->getTrainingDuration()}}</td>  
+                                  <td>{{$emp_trainings->conducted_by }}</td>
+                                </tr>
+                              @endforeach
+                            </tbody>
+                          </table>
                         </div>
                       </div>
-                      <!-- END timeline item -->
-                      <!-- timeline item -->
-                      <div>
-                        <i class="fas fa-comments bg-warning"></i>
-
-                        <div class="timeline-item">
-                          <span class="time"><i class="far fa-clock"></i> 27 mins ago</span>
-
-                          <h3 class="timeline-header"><a href="#">Jay White</a> commented on your post</h3>
-
-                          <div class="timeline-body">
-                            Take me to your leader!
-                            Switzerland is small and neutral!
-                            We are more like Germany, ambitious and misunderstood!
-                          </div>
-                          <div class="timeline-footer">
-                            <a href="#" class="btn btn-warning btn-flat btn-sm">View comment</a>
-                          </div>
-                        </div>
-                      </div>
-                      <!-- END timeline item -->
-                      <!-- timeline time label -->
-                      <div class="time-label">
-                        <span class="bg-success">
-                          3 Jan. 2014
-                        </span>
-                      </div>
-                      <!-- /.timeline-label -->
-                      <!-- timeline item -->
-                      <div>
-                        <i class="fas fa-camera bg-purple"></i>
-
-                        <div class="timeline-item">
-                          <span class="time"><i class="far fa-clock"></i> 2 days ago</span>
-
-                          <h3 class="timeline-header"><a href="#">Mina Lee</a> uploaded new photos</h3>
-
-                          <div class="timeline-body">
-                            <img src="http://placehold.it/150x100" alt="...">
-                            <img src="http://placehold.it/150x100" alt="...">
-                            <img src="http://placehold.it/150x100" alt="...">
-                            <img src="http://placehold.it/150x100" alt="...">
-                          </div>
-                        </div>
-                      </div>
-                      <!-- END timeline item -->
-                      <div>
-                        <i class="far fa-clock bg-gray"></i>
-                      </div>
-                    </div>
-                  </div>
-                  <!-- /.tab-pane -->
-
-                  <div class="tab-pane" id="settings">
-                    <form class="form-horizontal">
-                      <div class="form-group">
-                        <label for="inputName" class="col-sm-2 control-label">Name</label>
-
-                        <div class="col-sm-10">
-                          <input type="email" class="form-control" id="inputName" placeholder="Name">
-                        </div>
-                      </div>
-                      <div class="form-group">
-                        <label for="inputEmail" class="col-sm-2 control-label">Email</label>
-
-                        <div class="col-sm-10">
-                          <input type="email" class="form-control" id="inputEmail" placeholder="Email">
-                        </div>
-                      </div>
-                      <div class="form-group">
-                        <label for="inputName2" class="col-sm-2 control-label">Name</label>
-
-                        <div class="col-sm-10">
-                          <input type="text" class="form-control" id="inputName2" placeholder="Name">
-                        </div>
-                      </div>
-                      <div class="form-group">
-                        <label for="inputExperience" class="col-sm-2 control-label">Experience</label>
-
-                        <div class="col-sm-10">
-                          <textarea class="form-control" id="inputExperience" placeholder="Experience"></textarea>
-                        </div>
-                      </div>
-                      <div class="form-group">
-                        <label for="inputSkills" class="col-sm-2 control-label">Skills</label>
-
-                        <div class="col-sm-10">
-                          <input type="text" class="form-control" id="inputSkills" placeholder="Skills">
-                        </div>
-                      </div>
-                      <div class="form-group">
-                        <div class="col-sm-offset-2 col-sm-10">
-                          <div class="checkbox">
-                            <label>
-                              <input type="checkbox"> I agree to the <a href="#">terms and conditions</a>
-                            </label>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="form-group">
-                        <div class="col-sm-offset-2 col-sm-10">
-                          <button type="submit" class="btn btn-danger">Submit</button>
-                        </div>
-                      </div>
-                    </form>
                   </div>
                   <!-- /.tab-pane -->
                 </div>

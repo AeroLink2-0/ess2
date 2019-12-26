@@ -8,6 +8,10 @@ class EmpEmploymentDetails extends Model
 {
     protected $table = 'tbl_emp_employment_details';
 
+    public function date_of_hired()
+    {
+        return \Carbon\Carbon::parse($this->date_of_hired)->isoFormat('LL');
+    }
     public function emp_position(){
         return $this->hasOne('App\JobPositions','id','position_id');
     }
@@ -17,5 +21,9 @@ class EmpEmploymentDetails extends Model
 
     public function emp_skills(){
         return $this->hasMany('App\EmployeeSkills','employee_id','employee_id');
+    }
+
+    public function work_experience(){
+        return $this->hasMany('App\EmpWorkExperience','employee_id','employee_id');
     }
 }

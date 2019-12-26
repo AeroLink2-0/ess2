@@ -58,4 +58,13 @@ class EmployeeBasicInformation extends Model
     public function emp_educ_background(){
         return $this->hasMany('App\EmpEducationalBackground', 'employee_id', 'employee_id');
     }
+    public function emp_family_background(){
+        return $this->hasOne('App\FamilyBackground', 'employee_id', 'employee_id');
+    }
+    public function emp_employment_details(){
+        return $this->hasOne('App\EmpEmploymentDetails', 'employee_id', 'employee_id');
+    }
+    public function emp_trainings(){
+        return $this->hasMany('App\EmpTrainings', 'employee_id', 'employee_id');
+    }
 }
