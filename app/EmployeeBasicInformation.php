@@ -52,4 +52,10 @@ class EmployeeBasicInformation extends Model
     public function blood_type(){
         return ($this->blood_type == '') ?  '-' : $this->blood_type;
     }
+    public function emp_address(){
+        return $this->hasOne('App\EmpAddress', 'employee_id', 'employee_id');
+    }
+    public function emp_educ_background(){
+        return $this->hasMany('App\EmpEducationalBackground', 'employee_id', 'employee_id');
+    }
 }

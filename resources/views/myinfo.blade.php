@@ -36,43 +36,43 @@
                 </div>
 
                 <h3 class="profile-username text-center">
-                <?= $myinfo->fullname; ?>
+                {{ $myinfo->fullname }}
                 </h3>
 
                 <p class="text-muted text-center">
-                  <?php echo $myinfo->emp_details->emp_position->position ?>
+                {{ $myinfo->emp_details->emp_position->position }}
                 </p>
 
                 <ul class="list-group list-group-unbordered mb-3">
                   <li class="list-group-item">
-                    <b>Birthday</b> <a class="float-right"><?= $myinfo->birthday ?></a>
+                    <b>Birthday</b> <a class="float-right">{{ $myinfo->birthday }}</a>
                   </li>
                   <li class="list-group-item">
-                    <b>Employee Type</b> <a class="float-right"><?= $myinfo->emp_details->employee_type->employee_type ?></a>
+                    <b>Employee Type</b> <a class="float-right">{{ $myinfo->emp_details->employee_type->employee_type }}</a>
                   </li>
                   <li class="list-group-item">
-                    <b>Place of Birth</b> <a class="float-right"><?= $myinfo->place_of_birth ?></a>
+                    <b>Place of Birth</b> <a class="float-right">{{ $myinfo->place_of_birth }}</a>
                   </li>
                   <li class="list-group-item">
-                    <b>Sex</b> <a class="float-right"><?= $myinfo->emp_sex->sex ?></a>
+                    <b>Sex</b> <a class="float-right">{{ $myinfo->emp_sex->sex }}</a>
                   </li>
                   <li class="list-group-item">
-                    <b>Civil Status</b> <a class="float-right"><?= $myinfo->civil_status->civil_status ?></a>
+                    <b>Civil Status</b> <a class="float-right">{{ $myinfo->civil_status->civil_status }}</a>
                   </li>
                   <li class="list-group-item">
-                    <b>Citizenship</b> <a class="float-right"><?= $myinfo->citizenship->citizenship ?></a>
+                    <b>Citizenship</b> <a class="float-right">{{ $myinfo->citizenship->citizenship }}</a>
                   </li>
                   <li class="list-group-item">
-                    <b>Height</b> <a class="float-right"><?= $myinfo->height() ?></a> 
+                    <b>Height</b> <a class="float-right">{{ $myinfo->height() }}</a> 
                   </li>
                   <li class="list-group-item">
-                    <b>Weight</b> <a class="float-right"><?= $myinfo->weight() ?></a> 
+                    <b>Weight</b> <a class="float-right">{{ $myinfo->weight() }}</a> 
                   </li>
                   <li class="list-group-item">
-                    <b>Blood Type</b> <a class="float-right"><?= $myinfo->blood_type() ?></a> 
+                    <b>Blood Type</b> <a class="float-right">{{ $myinfo->blood_type() }}</a> 
                   </li>  
                   <li class="list-group-item">
-                    <b>Contact Number</b> <a class="float-right"><?= $myinfo->contact_number ?></a> 
+                    <b>Contact Number</b> <a class="float-right">{{ $myinfo->contact_number }}</a> 
                   </li>
                 </ul>
 
@@ -96,117 +96,69 @@
               <div class="card-body">
                 <div class="tab-content">
                   <div class="active tab-pane" id="activity">
-                    <!-- Post -->
-                    <div class="post">
-                      <div class="user-block">
-                        <img class="img-circle img-bordered-sm" src="../../dist/img/user1-128x128.jpg" alt="user image">
-                        <span class="username">
-                          <a href="#">Jonathan Burke Jr.</a>
-                          <a href="#" class="float-right btn-tool"><i class="fas fa-times"></i></a>
-                        </span>
-                        <span class="description">Shared publicly - 7:30 PM today</span>
-                      </div>
-                      <!-- /.user-block -->
-                      <p>
-                        Lorem ipsum represents a long-held tradition for designers,
-                        typographers and the like. Some people hate it and argue for
-                        its demise, but others ignore the hate as they create awesome
-                        tools to help create filler text for everyone from bacon lovers
-                        to Charlie Sheen fans.
-                      </p>
-
-                      <p>
-                        <a href="#" class="link-black text-sm mr-2"><i class="fas fa-share mr-1"></i> Share</a>
-                        <a href="#" class="link-black text-sm"><i class="far fa-thumbs-up mr-1"></i> Like</a>
-                        <span class="float-right">
-                          <a href="#" class="link-black text-sm">
-                            <i class="far fa-comments mr-1"></i> Comments (5)
-                          </a>
-                        </span>
-                      </p>
-
-                      <input class="form-control form-control-sm" type="text" placeholder="Type a comment">
-                    </div>
-                    <!-- /.post -->
-
-                    <!-- Post -->
-                    <div class="post clearfix">
-                      <div class="user-block">
-                        <img class="img-circle img-bordered-sm" src="../../dist/img/user7-128x128.jpg" alt="User Image">
-                        <span class="username">
-                          <a href="#">Sarah Ross</a>
-                          <a href="#" class="float-right btn-tool"><i class="fas fa-times"></i></a>
-                        </span>
-                        <span class="description">Sent you a message - 3 days ago</span>
-                      </div>
-                      <!-- /.user-block -->
-                      <p>
-                        Lorem ipsum represents a long-held tradition for designers,
-                        typographers and the like. Some people hate it and argue for
-                        its demise, but others ignore the hate as they create awesome
-                        tools to help create filler text for everyone from bacon lovers
-                        to Charlie Sheen fans.
-                      </p>
-
-                      <form class="form-horizontal">
-                        <div class="input-group input-group-sm mb-0">
-                          <input class="form-control form-control-sm" placeholder="Response">
-                          <div class="input-group-append">
-                            <button type="submit" class="btn btn-danger">Send</button>
-                          </div>
+                    <b>Address</b>
+                      <div class="row">
+                        <div class="col-md-3 mt-4">
+                          <h6>House/Block/Lot No.</h6><p>{{ $myinfo->emp_address->house_block_lot_no }}</p>
                         </div>
-                      </form>
-                    </div>
-                    <!-- /.post -->
-
-                    <!-- Post -->
-                    <div class="post">
-                      <div class="user-block">
-                        <img class="img-circle img-bordered-sm" src="../../dist/img/user6-128x128.jpg" alt="User Image">
-                        <span class="username">
-                          <a href="#">Adam Jones</a>
-                          <a href="#" class="float-right btn-tool"><i class="fas fa-times"></i></a>
-                        </span>
-                        <span class="description">Posted 5 photos - 5 days ago</span>
-                      </div>
-                      <!-- /.user-block -->
-                      <div class="row mb-3">
-                        <div class="col-sm-6">
-                          <img class="img-fluid" src="../../dist/img/photo1.png" alt="Photo">
+                        <div class="col-md-3 mt-4">
+                          <h6>Subdivision/Village</h6>
+                          <p><?php echo ($myinfo->emp_address->subdivision_or_village) ?  $this->blood_type : '-' ?></p>
                         </div>
-                        <!-- /.col -->
-                        <div class="col-sm-6">
-                          <div class="row">
-                            <div class="col-sm-6">
-                              <img class="img-fluid mb-3" src="../../dist/img/photo2.png" alt="Photo">
-                              <img class="img-fluid" src="../../dist/img/photo3.jpg" alt="Photo">
+                        <div class="col-md-3 mt-4">
+                          <h6>Street</h6>
+                          <p><?php echo ($myinfo->emp_address->street) ?  $myinfo->emp_address->street : '-' ?></p>
+                        </div>
+                        <div class="col-md-3 mt-4">
+                          <h6>Barangay</h6>
+                          <p><?php echo ($myinfo->emp_address->barangay->brgyDesc) ?  $myinfo->emp_address->barangay->brgyDesc : '-' ?></p>
+                        </div>
+                        <div class="col-md-3 mt-4">
+                          <h6>City/Municipality</h6>
+                          <p><?php echo ($myinfo->emp_address->citymun->citymunDesc) ?  $myinfo->emp_address->citymun->citymunDesc : '-' ?></p>
+                        </div>
+                        <div class="col-md-3 mt-4">
+                          <h6>Province</h6>
+                          <p><?php echo ($myinfo->emp_address->province->provDesc) ?  $myinfo->emp_address->province->provDesc : '-' ?></p>
+                        </div>
+                        <div class="col-md-3 mt-4">
+                          <h6>Region</h6>
+                          <p><?php echo ($myinfo->emp_address->region->regDesc) ?  $myinfo->emp_address->region->regDesc : '-' ?></p>
+                        </div>
+                        <div class="col-md-3 mt-4">
+                          <h6>Is Your Permanent Address</h6>
+                          <p><?php echo ($myinfo->emp_address->is_permanent_address == 0) ?  'No' : 'Yes' ?></p>
+                        </div>
+                      </div><hr>
+                      <div class="row">
+                        <b>Educational Background</b>
+                          <div class="col-md-12">
+                            <div class="table-responsive-sm table-borderless">          
+                              <table class="table">
+                                <thead>
+                                  <tr>
+                                    <th>Level</th>
+                                    <th>School</th>
+                                    <th>Course</th>
+                                    <th>School Year</th>
+                                    <th>Year Graduated</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  @foreach($myinfo->emp_educ_background as $emp_educ_bg)
+                                  <tr>
+                                    <td>{{$emp_educ_bg->educ_level->educ_level }}</td>
+                                    <td>{{$emp_educ_bg->name_of_school }}</td>
+                                    <td><?php echo ($emp_educ_bg->course) ?  $emp_educ_bg->course : '-' ?></td>
+                                    <td>{{$emp_educ_bg->date_from }} - {{$emp_educ_bg->date_to }}</td>
+                                    <td>{{$emp_educ_bg->year_graduated }}</td>
+                                  </tr>
+                                  @endforeach
+                                </tbody>
+                              </table>
                             </div>
-                            <!-- /.col -->
-                            <div class="col-sm-6">
-                              <img class="img-fluid mb-3" src="../../dist/img/photo4.jpg" alt="Photo">
-                              <img class="img-fluid" src="../../dist/img/photo1.png" alt="Photo">
-                            </div>
-                            <!-- /.col -->
                           </div>
-                          <!-- /.row -->
-                        </div>
-                        <!-- /.col -->
                       </div>
-                      <!-- /.row -->
-
-                      <p>
-                        <a href="#" class="link-black text-sm mr-2"><i class="fas fa-share mr-1"></i> Share</a>
-                        <a href="#" class="link-black text-sm"><i class="far fa-thumbs-up mr-1"></i> Like</a>
-                        <span class="float-right">
-                          <a href="#" class="link-black text-sm">
-                            <i class="far fa-comments mr-1"></i> Comments (5)
-                          </a>
-                        </span>
-                      </p>
-
-                      <input class="form-control form-control-sm" type="text" placeholder="Type a comment">
-                    </div>
-                    <!-- /.post -->
                   </div>
                   <!-- /.tab-pane -->
                   <div class="tab-pane" id="timeline">
