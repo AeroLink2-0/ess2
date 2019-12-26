@@ -9,7 +9,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Projects</h1>
+            <h1>Personal Information</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -27,7 +27,7 @@
           <div class="col-md-3">
 
             <!-- Profile Image -->
-            <div class="card card-primary card-outline">
+            <div class="card card-success card-outline">
               <div class="card-body box-profile">
                 <div class="text-center">
                   <img class="profile-user-img img-fluid img-circle"
@@ -76,7 +76,7 @@
                   </li>
                 </ul>
 
-                <a href="#" class="btn btn-primary btn-block"><i class="fa fa-pencil"></i><b>Edit</b></a>
+                <a href="#" class="btn btn-success btn-block"><i class="fa fa-pencil"></i><b>Edit</b></a>
               </div>
               <!-- /.card-body -->
             </div>
@@ -158,6 +158,31 @@
                               </table>
                             </div>
                           </div>
+                      </div><hr>
+                        <b>Citizenship</b>
+                      <div class="row">
+                        <div class="col-md-3 mt-4">
+                          <h6>Citizenship</h6>
+                          {{ $myinfo->citizenship->citizenship}}
+                        </div>
+                        <div class="col-md-3 mt-4">
+                          <h6>Have Dual Citizenship?</h6>
+                          <?php echo ($myinfo->citizenship->have_dual_citizenship == 0) ?  'No' : 'Yes' ?>
+                        </div>
+                        @if($myinfo->citizenship->have_dual_citizenship == 1)
+                          <div class="col-md-2 mt-4">
+                            <h6>By Birth?</h6>
+                            <?php echo ($myinfo->citizenship->by_birth == 0) ?  'No' : 'Yes' ?>
+                          </div>
+                          <div class="col-md-2 mt-4">
+                            <h6>By Naturalization?</h6>
+                            <?php echo ($myinfo->citizenship->by_birth == 0) ?  'No' : 'Yes' ?>
+                          </div>
+                          <div class="col-md-2 mt-4">
+                            <h6>Country</h6>
+                              {{$myinfo->country}}
+                          </div>
+                          @endif
                       </div>
                   </div>
                   <!-- /.tab-pane -->

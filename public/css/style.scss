@@ -69,3 +69,7 @@
     position: absolute;
     opacity: .8;
 }
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+    color: #fff;
+    background-color: #28a745!important;
+}
