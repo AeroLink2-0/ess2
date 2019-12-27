@@ -141,6 +141,7 @@
                                     <th>School</th>
                                     <th>Course</th>
                                     <th>School Year</th>
+                                    <th>Honors/Awards</th>
                                     <th>Year Graduated</th>
                                   </tr>
                                 </thead>
@@ -151,6 +152,15 @@
                                     <td>{{$emp_educ_bg->name_of_school }}</td>
                                     <td><?php echo ($emp_educ_bg->course) ?  $emp_educ_bg->course : '-' ?></td>
                                     <td>{{$emp_educ_bg->date_from }} - {{$emp_educ_bg->date_to }}</td>
+                                    <td>
+                                      @if(count($emp_educ_bg->academic_honors) > 0)
+                                        @foreach($emp_educ_bg->academic_honors as $honors)
+                                          {{$honors->honors}}
+                                        @endforeach
+                                      @else
+                                        <p>-</p>
+                                      @endif
+                                    </td>
                                     <td>{{$emp_educ_bg->year_graduated }}</td>
                                   </tr>
                                   @endforeach
@@ -183,7 +193,61 @@
                               {{$myinfo->country}}
                           </div>
                           @endif
-                      </div>
+                      </div><hr>
+                        <b>Family Background</b>
+                        <div class="row">
+                          <div class="col-md-6 mt-4">
+                            <h6>Spouse Name</h6>
+                            <?php echo ($myinfo->emp_family_background) ?  $myinfo->emp_family_background->spouse_name : '-' ?>
+                          </div>
+                          <div class="col-md-6 mt-4">
+                            <h6>Spouse Occupation</h6>
+                            <?php echo ($myinfo->emp_family_background) ?  $myinfo->emp_family_background->spouse_occupation: '-' ?>
+                          </div>
+                          <div class="col-md-6 mt-4">
+                            <h6>Father Name</h6>
+                            <?php echo ($myinfo->emp_family_background) ?  $myinfo->emp_family_background->father_name : '-' ?>
+                          </div>
+                          <div class="col-md-6 mt-4">
+                            <h6>Father Occupation</h6>
+                            <?php echo ($myinfo->emp_family_background) ?  $myinfo->emp_family_background->father_occupation: '-' ?>
+                          </div>
+                          <div class="col-md-6 mt-4">
+                            <h6>Mother Name</h6>
+                            <?php echo ($myinfo->emp_family_background) ?  $myinfo->emp_family_background->mother_name : '-' ?>
+                          </div>
+                          <div class="col-md-6 mt-4">
+                            <h6>Mother Occupation</h6>
+                            <?php echo ($myinfo->emp_family_background) ?  $myinfo->emp_family_background->mother_occupation: '-' ?>
+                          </div>
+                          <div class="col-md-3 mt-4">
+                            <h6>Guardian Name</h6>
+                            <?php echo ($myinfo->emp_family_background) ?  $myinfo->emp_family_background->guardian_name : '-' ?>
+                          </div>
+                          <div class="col-md-3 mt-4">
+                            <h6>Guardian Occupation</h6>
+                            <?php echo ($myinfo->emp_family_background) ?  $myinfo->emp_family_background->guardian_occupation: '-' ?>
+                          </div>
+                          <div class="col-md-3 mt-4">
+                            <h6>Guardian Contact Number</h6>
+                            <?php echo ($myinfo->emp_family_background) ?  $myinfo->emp_family_background->guardian_cno: '-' ?>
+                          </div>
+                        </div><hr>
+                        <b>In Case of Emergency</b>
+                          <div class="row">
+                            <div class="col-md-3 mt-4">
+                              <h6>Complete Name</h6>
+                              <?php echo ($myinfo->emp_family_background->incase_of_emergency) ?  $myinfo->emp_family_background->incase_of_emergency->complete_name: '-' ?>
+                            </div>
+                            <div class="col-md-3 mt-4">
+                              <h6>Contact Number</h6>
+                              <?php echo ($myinfo->emp_family_background->incase_of_emergency) ?  $myinfo->emp_family_background->incase_of_emergency->contact_number: '-' ?>
+                            </div>
+                            <div class="col-md-3 mt-4">
+                              <h6>Relationship</h6>
+                              <?php echo ($myinfo->emp_family_background->incase_of_emergency) ?  $myinfo->emp_family_background->incase_of_emergency->relationship : '-' ?>
+                            </div>
+                          </div>
                   </div>
                   <!-- /.tab-pane -->
                   <div class="tab-pane" id="timeline">

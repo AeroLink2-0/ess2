@@ -12,6 +12,6 @@ class PersonalInformationController extends Controller
         
         $myinfo = EmployeeBasicInformation::where(['employee_id' => Auth::user()->employee_id])->first();
 
-       return view('myinfo',['myinfo' => $myinfo]);
+       return view('myinfo/index',['myinfo' => $myinfo]);
     }
 }

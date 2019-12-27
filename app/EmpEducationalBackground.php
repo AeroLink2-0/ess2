@@ -11,4 +11,7 @@ class EmpEducationalBackground extends Model
     public function educ_level(){
         return $this->hasOne('App\EducationalLevel','id','level_id');
     }
+    public function academic_honors(){
+        return $this->hasMany('App\AcademicHonors','educ_background_id','id');
+    }
 }
