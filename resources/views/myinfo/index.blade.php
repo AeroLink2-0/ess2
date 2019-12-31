@@ -79,7 +79,9 @@
                   </li>
                 </ul>
 
-                <a href="#" class="btn btn-success btn-block"><i class="fa fa-pencil"></i><b>Edit</b></a>
+                <button type="button" class="btn btn-success btn-block" data-toggle="modal" data-target="#EditMainProfile">
+                  Edit
+                </button>
               </div>
               <!-- /.card-body -->
             </div>
@@ -99,219 +101,11 @@
               <div class="card-body">
                 <div class="tab-content">
                   <div class="active tab-pane" id="info">
-                    <b>Address</b>
-                      <div class="row">
-                        <div class="col-md-3 mt-4">
-                          <h6>House/Block/Lot No.</h6><p>{{ $myinfo->emp_address->house_block_lot_no }}</p>
-                        </div>
-                        <div class="col-md-3 mt-4">
-                          <h6>Subdivision/Village</h6>
-                          <p><?php echo ($myinfo->emp_address->subdivision_or_village) ?  $this->blood_type : '-' ?></p>
-                        </div>
-                        <div class="col-md-3 mt-4">
-                          <h6>Street</h6>
-                          <p><?php echo ($myinfo->emp_address->street) ?  $myinfo->emp_address->street : '-' ?></p>
-                        </div>
-                        <div class="col-md-3 mt-4">
-                          <h6>Barangay</h6>
-                          <p><?php echo ($myinfo->emp_address->barangay->brgyDesc) ?  $myinfo->emp_address->barangay->brgyDesc : '-' ?></p>
-                        </div>
-                        <div class="col-md-3 mt-4">
-                          <h6>City/Municipality</h6>
-                          <p><?php echo ($myinfo->emp_address->citymun->citymunDesc) ?  $myinfo->emp_address->citymun->citymunDesc : '-' ?></p>
-                        </div>
-                        <div class="col-md-3 mt-4">
-                          <h6>Province</h6>
-                          <p><?php echo ($myinfo->emp_address->province->provDesc) ?  $myinfo->emp_address->province->provDesc : '-' ?></p>
-                        </div>
-                        <div class="col-md-3 mt-4">
-                          <h6>Region</h6>
-                          <p><?php echo ($myinfo->emp_address->region->regDesc) ?  $myinfo->emp_address->region->regDesc : '-' ?></p>
-                        </div>
-                        <div class="col-md-3 mt-4">
-                          <h6>Is Your Permanent Address</h6>
-                          <p><?php echo ($myinfo->emp_address->is_permanent_address == 0) ?  'No' : 'Yes' ?></p>
-                        </div>
-                      </div><hr>
-                      <div class="row">
-                        <b>Educational Background</b>
-                          <div class="col-md-12">
-                            <div class="table-responsive-sm table-borderless">          
-                              <table class="table">
-                                <thead>
-                                  <tr>
-                                    <th>Level</th>
-                                    <th>School</th>
-                                    <th>Course</th>
-                                    <th>School Year</th>
-                                    <th>Honors/Awards</th>
-                                    <th>Year Graduated</th>
-                                  </tr>
-                                </thead>
-                                <tbody>
-                                  @foreach($myinfo->emp_educ_background as $emp_educ_bg)
-                                  <tr>
-                                    <td>{{$emp_educ_bg->educ_level->educ_level }}</td>
-                                    <td>{{$emp_educ_bg->name_of_school }}</td>
-                                    <td><?php echo ($emp_educ_bg->course) ?  $emp_educ_bg->course : '-' ?></td>
-                                    <td>{{$emp_educ_bg->date_from }} - {{$emp_educ_bg->date_to }}</td>
-                                    <td>
-                                      @if(count($emp_educ_bg->academic_honors) > 0)
-                                        @foreach($emp_educ_bg->academic_honors as $honors)
-                                          {{$honors->honors}}
-                                        @endforeach
-                                      @else
-                                        <p>-</p>
-                                      @endif
-                                    </td>
-                                    <td>{{$emp_educ_bg->year_graduated }}</td>
-                                  </tr>
-                                  @endforeach
-                                </tbody>
-                              </table>
-                            </div>
-                          </div>
-                      </div><hr>
-                        <b>Citizenship</b>
-                      <div class="row">
-                        <div class="col-md-3 mt-4">
-                          <h6>Citizenship</h6>
-                          {{ $myinfo->citizenship->citizenship}}
-                        </div>
-                        <div class="col-md-3 mt-4">
-                          <h6>Have Dual Citizenship?</h6>
-                          <?php echo ($myinfo->citizenship->have_dual_citizenship == 0) ?  'No' : 'Yes' ?>
-                        </div>
-                        @if($myinfo->citizenship->have_dual_citizenship == 1)
-                          <div class="col-md-2 mt-4">
-                            <h6>By Birth?</h6>
-                            <?php echo ($myinfo->citizenship->by_birth == 0) ?  'No' : 'Yes' ?>
-                          </div>
-                          <div class="col-md-2 mt-4">
-                            <h6>By Naturalization?</h6>
-                            <?php echo ($myinfo->citizenship->by_birth == 0) ?  'No' : 'Yes' ?>
-                          </div>
-                          <div class="col-md-2 mt-4">
-                            <h6>Country</h6>
-                              {{$myinfo->country}}
-                          </div>
-                          @endif
-                      </div><hr>
-                        <b>Family Background</b>
-                        <div class="row">
-                          <div class="col-md-6 mt-4">
-                            <h6>Spouse Name</h6>
-                            <?php echo ($myinfo->emp_family_background) ?  $myinfo->emp_family_background->spouse_name : '-' ?>
-                          </div>
-                          <div class="col-md-6 mt-4">
-                            <h6>Spouse Occupation</h6>
-                            <?php echo ($myinfo->emp_family_background) ?  $myinfo->emp_family_background->spouse_occupation: '-' ?>
-                          </div>
-                          <div class="col-md-6 mt-4">
-                            <h6>Father Name</h6>
-                            <?php echo ($myinfo->emp_family_background) ?  $myinfo->emp_family_background->father_name : '-' ?>
-                          </div>
-                          <div class="col-md-6 mt-4">
-                            <h6>Father Occupation</h6>
-                            <?php echo ($myinfo->emp_family_background) ?  $myinfo->emp_family_background->father_occupation: '-' ?>
-                          </div>
-                          <div class="col-md-6 mt-4">
-                            <h6>Mother Name</h6>
-                            <?php echo ($myinfo->emp_family_background) ?  $myinfo->emp_family_background->mother_name : '-' ?>
-                          </div>
-                          <div class="col-md-6 mt-4">
-                            <h6>Mother Occupation</h6>
-                            <?php echo ($myinfo->emp_family_background) ?  $myinfo->emp_family_background->mother_occupation: '-' ?>
-                          </div>
-                          <div class="col-md-3 mt-4">
-                            <h6>Guardian Name</h6>
-                            <?php echo ($myinfo->emp_family_background) ?  $myinfo->emp_family_background->guardian_name : '-' ?>
-                          </div>
-                          <div class="col-md-3 mt-4">
-                            <h6>Guardian Occupation</h6>
-                            <?php echo ($myinfo->emp_family_background) ?  $myinfo->emp_family_background->guardian_occupation: '-' ?>
-                          </div>
-                          <div class="col-md-3 mt-4">
-                            <h6>Guardian Contact Number</h6>
-                            <?php echo ($myinfo->emp_family_background) ?  $myinfo->emp_family_background->guardian_cno: '-' ?>
-                          </div>
-                        </div><hr>
-                        <b>In Case of Emergency</b>
-                          <div class="row">
-                            <div class="col-md-3 mt-4">
-                              <h6>Complete Name</h6>
-                              <?php echo ($myinfo->emp_family_background->incase_of_emergency) ?  $myinfo->emp_family_background->incase_of_emergency->complete_name: '-' ?>
-                            </div>
-                            <div class="col-md-3 mt-4">
-                              <h6>Contact Number</h6>
-                              <?php echo ($myinfo->emp_family_background->incase_of_emergency) ?  $myinfo->emp_family_background->incase_of_emergency->contact_number: '-' ?>
-                            </div>
-                            <div class="col-md-3 mt-4">
-                              <h6>Relationship</h6>
-                              <?php echo ($myinfo->emp_family_background->incase_of_emergency) ?  $myinfo->emp_family_background->incase_of_emergency->relationship : '-' ?>
-                            </div>
-                          </div>
+                    @include('myinfo.other_info')
                   </div>
                   <!-- /.tab-pane -->
                   <div class="tab-pane" id="employment_details">
-                    <b>Aerolink Company</b>
-                    <div class="row">
-                      <div class="col-md-4 mt-4">
-                        <h6>Date of Hired</h6>
-                        {{ $myinfo->emp_employment_details->date_of_hired()}}
-                      </div>
-                      <div class="col-md-4 mt-4">
-                        <h6>Employee Type</h6>
-                        {{ $myinfo->emp_employment_details->employee_type->employee_type}}
-                      </div>
-                      <div class="col-md-4 mt-4">
-                        <h6>Job Title</h6>
-                        {{ $myinfo->emp_employment_details->emp_position->position}}
-                      </div>
-                      <div class="col-md-4 mt-4">
-                        <h6>Job Category</h6>
-                        {{ $myinfo->emp_employment_details->emp_position->job_category->job_category}}
-                      </div>
-                      <div class="col-md-4 mt-4">
-                        <h6>Department</h6>
-                        {{ $myinfo->emp_employment_details->emp_position->department->department}}
-                      </div>
-                      <div class="col-md-4 mt-4">
-                        <h6>Salary</h6>
-                        {{ $myinfo->emp_employment_details->salary}}
-                      </div>
-                    </div><hr>
-                    <div class="row">
-                      <b>Work Experience</b>
-                      <div class="col-md-12">
-                        <div class="table-responsive-sm">
-                          <table id="work_experience" class="table table-bordered table-hover">
-                            <thead>
-                            <tr>
-                              <th>Position</th>
-                              <th>Department/Office/Division</th>
-                              <th>Company</th>
-                              <th>Salary</th>
-                              <th>Employee Type</th>
-                              <th>Duration</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                              @foreach($myinfo->emp_employment_details->work_experience as $work_experience)
-                                <tr>
-                                  <td>{{$work_experience->position }}</td>
-                                  <td>{{$work_experience->department }}</td>  
-                                  <td>{{$work_experience->company }}</td>
-                                  <td>{{$work_experience->salary }}</td>
-                                  <td>{{$work_experience->employee_type->employee_type }}</td>
-                                  <td>{{$work_experience->getDuration() }}</td>
-                                </tr>
-                              @endforeach
-                            </tbody>
-                          </table>
-                        </div>
-                      </div>
-                    </div>   
+                    @include('myinfo.employment_details')
                   </div>              
 
                   <div class="tab-pane" id="trainings">
@@ -338,6 +132,27 @@
                         </div>
                       </div>
                   </div>
+
+                   <div class="tab-pane" id="IDs">
+                    <div class="row">
+                      <div class="col-sm-12 col-md-4">
+                        <h6>GSIS No.</h6><p><?= ($myinfo->emp_ids) ? $myinfo->emp_ids->gsis_no : '-' ?></p>
+                      </div>
+                      <div class="col-sm-12 col-md-4">
+                        <h6>SSS No.</h6><p><?= ($myinfo->emp_ids) ? $myinfo->emp_ids->sss_id_no : '-' ?></p>
+                      </div>
+                      <div class="col-sm-12 col-md-4">
+                        <h6>PAGIBIG No.</h6><p><?= ($myinfo->emp_ids) ? $myinfo->emp_ids->pag_ibig_no : '-' ?></p>
+                      </div>
+                      <div class="col-sm-12 col-md-4">
+                        <h6>Philhealth_No.</h6><p><?= ($myinfo->emp_ids) ? $myinfo->emp_ids->philhealth_no : '-' ?></p>
+                      </div>
+                      <div class="col-sm-12 col-md-4">
+                        <h6>TIN No.</h6><p><?= ($myinfo->emp_ids) ? $myinfo->emp_ids->tin_number : '-' ?></p>
+                      </div>
+                    </div>
+                  </div>
+
                   <!-- /.tab-pane -->
                 </div>
                 <!-- /.tab-content -->
@@ -351,4 +166,23 @@
       </div><!-- /.container-fluid -->
     </section>
   </div>
+
+  <!--Modals -->
+  <div class="modal fade" id="EditMainProfile">
+    <div class="modal-dialog">
+      <div class="modal-content">
+
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Edit Profile</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+
+        <!-- Modal body -->
+        <div class="modal-body">
+         @include('myinfo.edit_main_profile') 
+        </div>
+      </div>
+    </div>
+</div>
 @endsection

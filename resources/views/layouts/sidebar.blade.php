@@ -2,11 +2,11 @@
 
 @section('title', 'Eden Ramoneda | Home')
             <!-- Navbar -->
-            <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+            <nav class="main-header navbar navbar-expand">
                 <!-- Left navbar links -->
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
+                        <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars hamburger-menu"></i></a>
                     </li>
                 </ul>
  

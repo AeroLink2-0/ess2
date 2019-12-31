@@ -18,7 +18,7 @@
     <!-- Styles -->
     @extends('layouts.styles')
 </head>
-<body>
+<body class="hold-transition sidebar-mini layout-fixed">
     <div id="app">
         <main>
             @yield('content')

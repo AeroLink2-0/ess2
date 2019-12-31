@@ -67,4 +67,7 @@ class EmployeeBasicInformation extends Model
     public function emp_trainings(){
         return $this->hasMany('App\EmpTrainings', 'employee_id', 'employee_id');
     }
+    public function emp_ids(){
+        return $this->hasOne('App\EmpIDs', 'employee_id', 'employee_id');
+    }
 }
