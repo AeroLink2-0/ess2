@@ -338,6 +338,27 @@
                         </div>
                       </div>
                   </div>
+
+                   <div class="tab-pane" id="IDs">
+                    <div class="row">
+                      <div class="col-sm-12 col-md-4">
+                        <h6>GSIS No.</h6><p><?= ($myinfo->emp_ids) ? $myinfo->emp_ids->gsis_no : '-' ?></p>
+                      </div>
+                      <div class="col-sm-12 col-md-4">
+                        <h6>SSS No.</h6><p><?= ($myinfo->emp_ids) ? $myinfo->emp_ids->sss_id_no : '-' ?></p>
+                      </div>
+                      <div class="col-sm-12 col-md-4">
+                        <h6>PAGIBIG No.</h6><p><?= ($myinfo->emp_ids) ? $myinfo->emp_ids->pag_ibig_no : '-' ?></p>
+                      </div>
+                      <div class="col-sm-12 col-md-4">
+                        <h6>Philhealth_No.</h6><p><?= ($myinfo->emp_ids) ? $myinfo->emp_ids->philhealth_no : '-' ?></p>
+                      </div>
+                      <div class="col-sm-12 col-md-4">
+                        <h6>TIN No.</h6><p><?= ($myinfo->emp_ids) ? $myinfo->emp_ids->tin_number : '-' ?></p>
+                      </div>
+                    </div>
+                  </div>
+
                   <!-- /.tab-pane -->
                 </div>
                 <!-- /.tab-content -->
