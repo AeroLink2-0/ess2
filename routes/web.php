@@ -21,4 +21,5 @@ Route::get('/home', 'HomeController@index')->name('home');
 //modules
 Route::prefix('/myinfo')->group(function () {
     Route::get('/', 'PersonalInformationController@index');
+    Route::post('updatemainprofile/{employee_id}', 'PersonalInformationController@UpdateMainProfile');
 });

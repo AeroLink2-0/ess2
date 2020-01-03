@@ -7,36 +7,41 @@ use App\TblSex;
 use App\EmployeeBasicInformation;
 use App\TblCivilStatus;
 use Auth;
-
+use Validator;
 class PersonalInformationController extends Controller
 {
     public function index(){
         $gender = TblSex::all();
+
         $civil_status = TblCivilStatus::all();
+
         $myinfo = EmployeeBasicInformation::where(['employee_id' => Auth::user()->employee_id])->first();
 
        return view('myinfo/index',['myinfo' => $myinfo,'gender' => $gender, 'civil_status'=> $civil_status]);
     }
 
-    public function UpdateBasicInfo(Request $req){
+    public function UpdateMainProfile(Request $request, $employee_id){
         $myinfo = EmployeeBasicInformation::where(['employee_id' => Auth::user()->employee_id])->first();
-      /*  $validator = Validator::make($request->all(), [
-            'edit_skill_name' => 'required',
-            'edit_skill_color' => 'required',
-            'edit_percent' => 'required',
+        $validator = Validator::make($request->all(), [
+            'date_of_birth' => 'required',
+            'place_of_birth' => 'required',
+            'contact_number' => 'required',
         ]);
 
         if ($validator->fails()) {
-            return redirect('/admin/skills/updateSkillForm/'.$skill->id)
+            return redirect('/myinfo')
                         ->withErrors($validator)
                         ->withInput();
         }else{
-        $skill = SkillsModel::find($id);
-        $skill->skill = $request->edit_skill_name;
-        $skill->color = $request->edit_skill_color;
-        $skill->percent = $request->edit_percent;
-        $skill->save();
-            return redirect('/admin/skills/updateSkillForm/'.$skill->id)->with('success','Skill Updated!');
-        }*/
+        $myinfo->date_of_birth = $request->date_of_birth;
+        $myinfo->place_of_birth = $request->place_of_birth;
+        $myinfo->sex_id = $request->gender;
+        $myinfo->civil_status_id = $request->civil_status;
+        $myinfo->blood_type = $request->blood_type;
+        $myinfo->contact_number = $request->contact_number;
+        $myinfo->save();
+            return redirect('/myinfo');
+        }
+        return redirect('/myinfo');
     }
 }
