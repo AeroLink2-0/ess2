@@ -20,16 +20,32 @@
     </div>
     <div class="form-group">
       <label>Citizenship</label>
-      @if($myinfo->citizenship->citizenship == 1) 
-        <input type="text" class="form-control" name="citizenship" value="{{ $myinfo->citizenship->citizenship}}">
-      @else
-        <input type="text" class="form-control" name="citizenship" value="{{ $myinfo->citizenship->citizenship}}">
-      @endif
+        @if($myinfo->citizenship->have_dual_citizenship == 1) 
+          <input type="text" class="form-control" name="citizenship" value="{{ $myinfo->citizenship->citizenship}}"><br>
+          <div class="row">
+            <div class="col-md-6">
+              <h6>Have Dual Citizenship?</h6> 
+                @if($myinfo->citizenship->relation == 'by_birth') 
+                  <input type="radio" name="relation" value="by_birth" checked> By Birth? <br>
+                  <input type="radio" name="relation" value="by_naturalization"> By Naturalization <br>
+                @elseif($myinfo->citizenship->relation == 'by_naturalization')
+                  <input type="radio" name="relation" value="by_birth"> By Birth? <br>
+                  <input type="radio" name="relation" value="by_naturalization" checked> By Naturalization <br>
+                @endif
+            </div>
+            <div class="col-md-6">
+              <h6>Country</h6> 
+              <input type="text" class="form-control" name="country" value="{{ $myinfo->citizenship->country}}"><br>
+            </div>
+          </div>
+        @else
+          <input type="text" class="form-control" name="citizenship" value="{{ $myinfo->citizenship->citizenship}}">
+        @endif
     </div>
     <div class="form-group">
         <label>Civil Status</label>
         <select class="form-control" name="civil_status">
-            <option value="{{$myinfo->civil_status->civil_status}}" selected>{{$myinfo->civil_status->civil_status}}</option>
+            <option value="{{$myinfo->civil_status->id}}" selected>{{$myinfo->civil_status->civil_status}}</option>
             @foreach($myinfo->civil_status->getSelectedCivilStatus($myinfo->civil_status_id) as $civil_status)
               <option value="{{$civil_status->id}}">{{$civil_status->civil_status}}</option>
             @endforeach
@@ -46,3 +62,4 @@
     <button type="submit" class="btn btn-success">Update</button>
   </form>
 </div>
+
