@@ -15,8 +15,12 @@
 <!-- DataTables -->
 <script src="{{url('plugins/datatables/jquery.dataTables.js')}}"></script>
 <script src="{{url('plugins/datatables-bs4/js/dataTables.bootstrap4.js')}}"></script>
+<script src="{{url('js/vue.min.js')}}"></script>
 <script src="{{url('js/parallax.js')}}"></script>
+<script src="{{url('js/select2.min.js')}}"></script>
+<script src="{{url('js/MultiStep.min.js')}}"></script>
 <script src="{{url('js/style.js')}}"></script>
+<script src="{{url('js/app.js')}}"></script>
 <script>
 $(function () {
     $("#example1").DataTable();
@@ -29,5 +33,9 @@ $(function () {
     "autoWidth": false,
     });
     $('.textarea').summernote()
+
+    //select2
+  $('#edit_barangay').select2();
+
 });
 </script>

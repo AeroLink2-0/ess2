@@ -1,7 +1,5 @@
-@extends('layouts.app')
-
-@section('title', 'Eden Ramoneda | Home')
-            <!-- Navbar -->
+   <template>
+         <!-- Navbar -->
             <nav class="main-header navbar navbar-expand">
                 <!-- Left navbar links -->
                 <ul class="navbar-nav">
@@ -48,12 +46,7 @@
                             </a>
                         </li>
                         <li class="nav-item has-treeview">
-                            <a href="{{ url('/myinfo/')}}" class="nav-link">
-                                <i class="nav-icon fas fa-money"></i>
-                                <p>
-                                    Personal Information 
-                                </p>
-                            </a>
+                            <router-link :to="{ name: 'myinfo' }" class="nav-link">Personal Information</router-link>
                         </li>
                         <li class="nav-item has-treeview">
                             <a href="{{ url('/admin/projects')}}" class="nav-link">
@@ -81,15 +74,7 @@
                 </div>
                 <!-- /.sidebar -->
             </aside>
-<script>
-// Add active class to the current button (highlight it)
-//var header = document.getElementById("myDIV");
-var btns = document.getElementsByClassName("nav-item");
-for (var i = 0; i < btns.length; i++) {
-  btns[i].addEventListener("click", function() {
-  var current = document.getElementsByClassName("active");
-  current[0].className = current[0].className.replace(" active", "");
-  this.className += " active";
-  });
-}
-</script>
+    </template>
+    <script>
+        export default {}
+    </script>

@@ -2,6 +2,7 @@
   <form action="{{url('/myinfo/updatemainprofile/'.$myinfo->employee_id)}}" id="myform" method="POST">
     @csrf
     <div class="form-group">
+      <i class="fa fa-pencil"></i>
       <label>Birthday:</label>
       <input type="date" class="form-control" name="date_of_birth" value="{{ $myinfo->date_of_birth}}">
     </div>
