@@ -18,11 +18,14 @@ Route::get('/', function () {
 Route::get('/welcome', function(){
 return view('welcome');
 });
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 //modules
-Route::prefix('/myinfo')->group(function () {
-    Route::get('/', 'PersonalInformationController@index');
+Route::get('{path}', 'HomeController@index')->where('path','([A-z\d-\/_.]+)?');
+/*Route::prefix('/myinfo')->group(function () {
+    Route::get('{path}', 'PersonalInformationController@index')->where('path','([A-z\d-\/_.]+)?');
     Route::post('updatemainprofile/{employee_id}', 'PersonalInformationController@UpdateMainProfile');
-});
+});*/
+
