@@ -92,6 +92,7 @@
                     </div>
 
                     <div class="modal-body">
+                        <edit-main-profile></edit-main-profile>
                     </div>
                 </div>
             </div>
@@ -100,7 +101,26 @@
 </template>
 
 <script>
+    import EditMainProfile from './EditMainProfile.vue';
     export default {
+        components{
+            'edit-main-profile':EditMainProfile
+        }
+         data() {
+                return {
+                    form: new Form({
+                        date_of_birth: '',
+                        sex_id: '',
+                        civil_status_id: '',
+                        citizenship_id: '',
+                        height: '',
+                        weight:'',
+                        blood_type:'',
+                        contact_number
+                    })
+                }
+        },
+        
         mounted() {
             console.log('Component mounted.')
         }

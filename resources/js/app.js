@@ -8,7 +8,12 @@ require('./bootstrap');
 window.Vue = require('vue');
 
 import VueRouter from 'vue-router'
+import {Form, HasError, AlertError} from 'vform'
+window.form = Form;
 
+Vue.component(HasError.name, HasError)
+Vue.component(AlertError.name, AlertError)
+Vue.component('edit-main-profile', require('./EditMainProfile.vue').default);
 Vue.use(VueRouter)
 
 let routes = [
@@ -40,6 +45,6 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
  */
 
 const app = new Vue({
-    el: '#app',
+    el: ['#app'],
     router,
 });
