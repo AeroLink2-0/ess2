@@ -12,8 +12,8 @@ import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 
 let routes = [
-    {path: '/dashboard', component:require('./components/Dashboard.vue').default},
-    {path: '/myinfo', component:require('./components/MyInfo.vue').default}
+    {path: '/dashboard', component:require('./components/Dashboard.vue').default, meta: { middlewareAuth: true }},
+    {path: '/myinfo', component:require('./components/MyInfo.vue').default, meta: { middlewareAuth: true }}
 ]
 
 const router = new VueRouter({

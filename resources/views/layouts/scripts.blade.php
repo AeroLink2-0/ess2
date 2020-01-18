@@ -1,6 +1,3 @@
-<script src="{{url('js/select2.min.js')}}"></script>
-<script src="{{url('js/MultiStep.min.js')}}"></script>
-<script src="{{url('js/style.js')}}"></script>
 <script src="{{url('js/app.js')}}"></script>
 <script>
 $(function () {

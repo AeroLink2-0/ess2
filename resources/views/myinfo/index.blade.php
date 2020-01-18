@@ -162,8 +162,7 @@
           </div>
           <!-- /.row -->
         </div><!-- /.container-fluid -->
-      </section>
-    </div>
+    </section>
 
     <!--Modals -->
     <div class="modal fade" id="EditMainProfile">

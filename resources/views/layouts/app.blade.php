@@ -19,10 +19,10 @@
     @extends('layouts.styles')
 </head>
 <body class="hold-transition layout-fixed sidebar-mini">
-    <div class="wrapper">
-        <main>
-            @yield('content')
-        </main>
-    </div>
+
+    <main>
+        @yield('content')
+    </main>
+
 </body>
 </html>
