@@ -8,7 +8,7 @@ class EmployeeBasicInformation extends Model
 {
 
     protected $table = 'tbl_basic_information';
-
+    protected $appends = ['birthday','fullname'];
     protected $guarded = [
         ['employee_id']
     ];
@@ -30,7 +30,7 @@ class EmployeeBasicInformation extends Model
     }
 
     public function suffix_name(){
-        return ($this->suffix->suffix_name == 'None' ? '' : $this->suffix->suffix_name );
+        return ($this->suffix->suffix_name == 'None' ? '' : $this->suffix->suffix_name);
     }
 
     public function emp_sex(){

@@ -16,9 +16,10 @@ class PersonalInformationController extends Controller
 
         $civil_status = TblCivilStatus::all();
 
-        $myinfo = EmployeeBasicInformation::where(['employee_id' => Auth::user()->employee_id])->first();
+        $myinfo = EmployeeBasicInformation::where(['employee_id' => Auth::user()->employee_id])->get();
 
-       return view('myinfo/index',['myinfo' => $myinfo,'gender' => $gender, 'civil_status'=> $civil_status]);
+        return $myinfo;
+        // return view('myinfo/index',['myinfo' => $myinfo,'gender' => $gender, 'civil_status'=> $civil_status]);
     }
 
     public function UpdateMainProfile(Request $request, $employee_id){
@@ -53,5 +54,13 @@ class PersonalInformationController extends Controller
             return redirect('/myinfo');
         }
         return redirect('/myinfo');
+    }
+
+    public function samp(Request $request){
+        $this->validate($request, [
+            'date_of_birth' => 'required',
+            'place_of_birth' => 'required',
+            'contact_number' => 'required',
+        ]);
     }
 }

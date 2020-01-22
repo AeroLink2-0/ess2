@@ -22,10 +22,19 @@ return view('welcome');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+
+
 //modules
+Route::post('samp', 'PersonalInformationController@samp');
+Route::get('samp1', 'PersonalInformationController@index');
+
+
+//for view router
 Route::get('{path}', 'HomeController@index')->where('path','([A-z\d-\/_.]+)?');
+
 /*Route::prefix('/myinfo')->group(function () {
-    Route::get('{path}', 'PersonalInformationController@index')->where('path','([A-z\d-\/_.]+)?');
+    Route::get('/', 'PersonalInformationController@index');
     Route::post('updatemainprofile/{employee_id}', 'PersonalInformationController@UpdateMainProfile');
 });*/
 
