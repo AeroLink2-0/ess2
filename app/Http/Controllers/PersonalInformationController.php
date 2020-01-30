@@ -12,27 +12,24 @@ use Validator;
 class PersonalInformationController extends Controller
 {
     public function index(){
-        $gender = TblSex::all();
 
-        $civil_status = TblCivilStatus::all();
-
-        $myinfo = EmployeeBasicInformation::where(['employee_id' => Auth::user()->employee_id])->get();
+        $myinfo = EmployeeBasicInformation::with('emp_details.emp_type')->with('emp_sex')->with('civil_status')->with('citizenship')->where(['employee_id' => Auth::user()->employee_id])->first();
 
         return $myinfo;
         // return view('myinfo/index',['myinfo' => $myinfo,'gender' => $gender, 'civil_status'=> $civil_status]);
     }
 
-    public function UpdateMainProfile(Request $request, $employee_id){
-        $myinfo = EmployeeBasicInformation::where(['employee_id' => Auth::user()->employee_id])->first();
+    public function UpdateMainProfile(Request $request){
+     //   $myinfo = EmployeeBasicInformation::where(['employee_id' => Auth::user()->employee_id])->first();
 
-        $emp_citizenship = Citizenship::where(['employee_id' => Auth::user()->employee_id])->first();
-        $validator = Validator::make($request->all(), [
+    //    $emp_citizenship = Citizenship::where(['employee_id' => Auth::user()->employee_id])->first();
+        $this->validate($request, [
             'date_of_birth' => 'required',
             'place_of_birth' => 'required',
             'contact_number' => 'required',
         ]);
 
-        if ($validator->fails()) {
+     /*   if ($validator->fails()) {
             return redirect('/myinfo')
                         ->withErrors($validator)
                         ->withInput();
@@ -53,14 +50,15 @@ class PersonalInformationController extends Controller
         $myinfo->save();
             return redirect('/myinfo');
         }
-        return redirect('/myinfo');
+        return redirect('/myinfo');*/
+    }
+    public function civil_status(){
+        $civil_status = TblCivilStatus::all();
+        return $civil_status;
     }
 
-    public function samp(Request $request){
-        $this->validate($request, [
-            'date_of_birth' => 'required',
-            'place_of_birth' => 'required',
-            'contact_number' => 'required',
-        ]);
+    public function gender(){
+        $gender = TblSex::all();
+        return $gender;
     }
 }

@@ -28,50 +28,56 @@
                             </div>
 
                             <h3 class="profile-username text-center">
-                            
+                                {{ this.users.fullname }}
                             </h3>
 
                             <p class="text-muted text-center">
                             
                             </p>
 
-                            <ul v-for="empdata in users" :key="empdata.employee_id" class="list-group list-group-unbordered mb-3">
+                            <ul  class="list-group list-group-unbordered mb-3">
                                 <li class="list-group-item">
-                                <b>Employee No.</b> <a class="float-right">{{empdata.employee_id}}</a>
+                                <b>Employee No.</b> <a class="float-right">{{ this.users.employee_id}}</a>
                                 </li>
                                 <li class="list-group-item">
-                                <b>Birthday</b> <a class="float-right">{{empdata.birthday}}</a>
+                                <b>Birthday</b> <a class="float-right">{{this.users.birthday}}</a>
                                 </li>
                                 <li class="list-group-item">
-                                <b>Employee Type</b> <a class="float-right">{{ empdata.emp_employment_details }}</a>
+                                <b>Employee Type</b> <a class="float-right">{{ this.users.emp_details.emp_type.employee_type }}</a>
                                 </li>
                                 <li class="list-group-item">
-                                <b>Place of Birth</b> <a class="float-right"></a>
+                                <b>Place of Birth</b> <a class="float-right">{{ this.users.place_of_birth }}</a>
                                 </li>
                                 <li class="list-group-item">
-                                <b>Sex</b> <a class="float-right"></a>
+                                <b>Sex</b> <a class="float-right">{{ this.users.emp_sex.sex }}</a>
                                 </li>
                                 <li class="list-group-item">
-                                <b>Civil Status</b> <a class="float-right"></a>
+                                <b>Civil Status</b> <a class="float-right">{{ this.users.civil_status.civil_status }}</a>
                                 </li>
                                 <li class="list-group-item">
-                                <b>Citizenship</b> <a class="float-right"></a>
+                                <b>Citizenship</b> <a class="float-right">{{ this.users.citizenship.citizenship }}</a>
                                 </li>
                                 <li class="list-group-item">
-                                <b>Height</b> <a class="float-right"></a> 
+                                <b>Height</b> 
+                                    <a class="float-right" v-if="this.users.height">{{ this.users.height }}</a> 
+                                    <a class="float-right" v-else>-</a>
                                 </li>
                                 <li class="list-group-item">
-                                <b>Weight</b> <a class="float-right"></a> 
+                                <b>Weight</b>
+                                    <a class="float-right" v-if="this.users.weight">{{ this.users.weight }}</a> 
+                                    <a class="float-right" v-else>-</a>
                                 </li>
                                 <li class="list-group-item">
-                                <b>Blood Type</b> <a class="float-right"></a> 
+                                <b>Blood Type</b> 
+                                    <a class="float-right" v-if="this.users.weight">{{ this.users.blood_type }}</a> 
+                                    <a class="float-right" v-else>-</a>
                                 </li>  
                                 <li class="list-group-item">
-                                <b>Contact Number</b> <a class="float-right"></a> 
+                                <b>Contact Number</b> <a class="float-right">{{ this.users.contact_number }}</a> 
                                 </li>
                             </ul>
 
-                            <button type="button" class="btn btn-success btn-block" data-toggle="modal" data-target="#EditMainProfile">
+                            <button type="button" class="btn btn-success btn-block" @click="EditMainProfileModal(users)">
                                 Edit
                             </button>
                             </div>
@@ -91,7 +97,7 @@
                         </div>
 
                         <div class="modal-body">
-                            <edit-main-profile></edit-main-profile>
+                            <edit-main-profile v-bind:userdata="users"></edit-main-profile>
                         </div>
                     </div>
                 </div>
@@ -103,16 +109,35 @@
     export default {
             data() {
                 return {
-                   users: {}
+                   users: {
+                       emp_details : {
+                           emp_type: {}
+                       },
+                       emp_sex : {
+                           sex: {}
+                       },
+                       civil_status: {
+                           civil_status: ""
+                       },
+                       citizenship : {
+                           citizenship: ""
+                       }
+                   }
                 }
             },
           methods: {
+           EditMainProfileModal(employee_data){
+              this.users.place_of_birth = employee_data.place_of_birth;
+               $("#EditMainProfile").modal('show');
+           },
            loadEmployeeData(){
-               axios.get('samp1').catch(err => console.log(err)).then(data => {
+               axios.get('index').catch(err => console.log(err)).then(data => {
                    this.users = data.data;
                })
            }
+
         },
+         
         mounted() {
             this.loadEmployeeData();
         }

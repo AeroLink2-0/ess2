@@ -2090,39 +2090,63 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
+  props: ["userdata"],
   data: function data() {
     return {
+      users: {
+        gender: {},
+        civil_status: {}
+      },
       form: new Form({
-        date_of_birth: '',
-        sex_id: '',
-        civil_status_id: '',
-        citizenship_id: '',
-        height: '',
-        weight: '',
-        blood_type: '',
-        contact_number: ''
+        date_of_birth: "",
+        place_of_birth: "",
+        sex_id: "",
+        civil_status_id: "",
+        citizenship_id: "",
+        height: "",
+        weight: "",
+        blood_type: "",
+        contact_number: ""
       })
     };
   },
+  watch: {
+    userdata: function userdata(newValue, pastValue) {
+      this.form = new Form(newValue);
+    }
+  },
   methods: {
-    samp: function samp() {
+    UpdateMainProfile: function UpdateMainProfile() {
       // Submit the form via a POST request
-      this.form.post('samp').then(function (_ref) {
+      this.form.post("UpdateMainProfile").then(function (_ref) {
         var data = _ref.data;
         console.log(data);
+      });
+    },
+    loadGender: function loadGender() {
+      var _this = this;
+
+      axios.get('gender')["catch"](function (err) {
+        return console.log(err);
+      }).then(function (data) {
+        _this.gender = data.data;
+      });
+    },
+    loadCivilStatus: function loadCivilStatus() {
+      var _this2 = this;
+
+      axios.get('civil_status')["catch"](function (err) {
+        return console.log(err);
+      }).then(function (data) {
+        _this2.civil_status = data.data;
       });
     }
   },
   mounted: function mounted() {
-    console.log('Component mounted.');
+    this.form = this.userdata;
+    this.loadGender();
+    this.loadCivilStatus();
   }
 });
 
@@ -2238,17 +2262,40 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      users: {}
+      users: {
+        emp_details: {
+          emp_type: {}
+        },
+        emp_sex: {
+          sex: {}
+        },
+        civil_status: {
+          civil_status: ""
+        },
+        citizenship: {
+          citizenship: ""
+        }
+      }
     };
   },
   methods: {
+    EditMainProfileModal: function EditMainProfileModal(employee_data) {
+      this.users.place_of_birth = employee_data.place_of_birth;
+      $("#EditMainProfile").modal('show');
+    },
     loadEmployeeData: function loadEmployeeData() {
       var _this = this;
 
-      axios.get('samp1')["catch"](function (err) {
+      axios.get('index')["catch"](function (err) {
         return console.log(err);
       }).then(function (data) {
         _this.users = data.data;
@@ -38755,7 +38802,7 @@ var render = function() {
         on: {
           submit: function($event) {
             $event.preventDefault()
-            return _vm.samp($event)
+            return _vm.UpdateMainProfile($event)
           },
           keydown: function($event) {
             return _vm.form.onKeydown($event)
@@ -38873,11 +38920,12 @@ var render = function() {
                   }
                 }
               },
-              [
-                _c("option", { attrs: { value: "", selected: "" } }, [
-                  _vm._v("Samp")
+              _vm._l(_vm.gender, function(gender) {
+                return _c("option", { domProps: { value: gender.id } }, [
+                  _vm._v(_vm._s(gender.sex))
                 ])
-              ]
+              }),
+              0
             ),
             _vm._v(" "),
             _c("has-error", { attrs: { form: _vm.form, field: "sex_id" } })
@@ -38896,20 +38944,24 @@ var render = function() {
                 {
                   name: "model",
                   rawName: "v-model",
-                  value: _vm.form.citizenship_id,
-                  expression: "form.citizenship_id"
+                  value: _vm.form.citizenship.citizenship,
+                  expression: "form.citizenship.citizenship"
                 }
               ],
               staticClass: "form-control",
               class: { "is-invalid": _vm.form.errors.has("citizenship_id") },
               attrs: { type: "text", name: "citizenship_id" },
-              domProps: { value: _vm.form.citizenship_id },
+              domProps: { value: _vm.form.citizenship.citizenship },
               on: {
                 input: function($event) {
                   if ($event.target.composing) {
                     return
                   }
-                  _vm.$set(_vm.form, "citizenship_id", $event.target.value)
+                  _vm.$set(
+                    _vm.form.citizenship,
+                    "citizenship",
+                    $event.target.value
+                  )
                 }
               }
             }),
@@ -38917,7 +38969,127 @@ var render = function() {
             _c("has-error", {
               attrs: { form: _vm.form, field: "citizenship_id" }
             }),
-            _c("br")
+            _c("br"),
+            _vm._v(" "),
+            _vm.form.citizenship.have_dual_citizenship == 1
+              ? _c("h6", [
+                  _vm._v("Have Dual Citizenship?"),
+                  _c("br"),
+                  _c("br"),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "row" }, [
+                    _c(
+                      "div",
+                      { staticClass: "col-md-6" },
+                      [
+                        _vm.form.citizenship.relation == "by_birth"
+                          ? [
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.pick,
+                                    expression: "pick"
+                                  }
+                                ],
+                                attrs: { type: "radio", name: "relation" },
+                                domProps: {
+                                  value: _vm.by_birth,
+                                  checked: _vm._q(_vm.pick, _vm.by_birth)
+                                },
+                                on: {
+                                  change: function($event) {
+                                    _vm.pick = _vm.by_birth
+                                  }
+                                }
+                              }),
+                              _vm._v("By Birth?"),
+                              _c("br"),
+                              _c("br"),
+                              _vm._v(" "),
+                              _c("input", {
+                                attrs: { type: "radio", name: "relation" },
+                                domProps: { value: _vm.by_naturalization }
+                              }),
+                              _vm._v("By Naturalization?"),
+                              _c("br")
+                            ]
+                          : _vm.form.citizenship.relation == "by_naturalization"
+                          ? [
+                              _c("input", {
+                                attrs: { type: "radio", name: "relation" },
+                                domProps: { value: _vm.by_birth }
+                              }),
+                              _vm._v("By Birth?"),
+                              _c("br"),
+                              _c("br"),
+                              _vm._v(" "),
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.pick,
+                                    expression: "pick"
+                                  }
+                                ],
+                                attrs: { type: "radio", name: "relation" },
+                                domProps: {
+                                  value: _vm.by_naturalization,
+                                  checked: _vm._q(
+                                    _vm.pick,
+                                    _vm.by_naturalization
+                                  )
+                                },
+                                on: {
+                                  change: function($event) {
+                                    _vm.pick = _vm.by_naturalization
+                                  }
+                                }
+                              }),
+                              _vm._v("By Naturalization?"),
+                              _c("br")
+                            ]
+                          : _vm._e()
+                      ],
+                      2
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-md-6" }, [
+                      _vm._v(
+                        "\n                        Country\n                        "
+                      ),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.form.citizenship.country,
+                            expression: "form.citizenship.country"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        class: { "is-invalid": _vm.form.errors.has("country") },
+                        attrs: { type: "text", name: "country" },
+                        domProps: { value: _vm.form.citizenship.country },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.form.citizenship,
+                              "country",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      })
+                    ])
+                  ])
+                ])
+              : _vm._e()
           ],
           1
         ),
@@ -38960,11 +39132,12 @@ var render = function() {
                   }
                 }
               },
-              [
-                _c("option", { attrs: { value: "", selected: "" } }, [
-                  _vm._v("Samp")
+              _vm._l(_vm.civil_status, function(civil_status) {
+                return _c("option", { domProps: { value: civil_status.id } }, [
+                  _vm._v(_vm._s(civil_status.civil_status))
                 ])
-              ]
+              }),
+              0
             ),
             _vm._v(" "),
             _c("has-error", {
@@ -39151,86 +39324,139 @@ var render = function() {
         _c("div", { staticClass: "row" }, [
           _c("div", { staticClass: "col-md-3" }, [
             _c("div", { staticClass: "card card-success card-outline" }, [
-              _c(
-                "div",
-                { staticClass: "card-body box-profile" },
-                [
-                  _c("div", { staticClass: "text-center" }),
-                  _vm._v(" "),
-                  _c("h3", { staticClass: "profile-username text-center" }),
-                  _vm._v(" "),
-                  _c("p", { staticClass: "text-muted text-center" }),
-                  _vm._v(" "),
-                  _vm._l(_vm.users, function(empdata) {
-                    return _c(
-                      "ul",
-                      {
-                        key: empdata.employee_id,
-                        staticClass: "list-group list-group-unbordered mb-3"
-                      },
-                      [
-                        _c("li", { staticClass: "list-group-item" }, [
-                          _c("b", [_vm._v("Employee No.")]),
-                          _vm._v(" "),
-                          _c("a", { staticClass: "float-right" }, [
-                            _vm._v(_vm._s(empdata.employee_id))
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _c("li", { staticClass: "list-group-item" }, [
-                          _c("b", [_vm._v("Birthday")]),
-                          _vm._v(" "),
-                          _c("a", { staticClass: "float-right" }, [
-                            _vm._v(_vm._s(empdata.birthday))
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _c("li", { staticClass: "list-group-item" }, [
-                          _c("b", [_vm._v("Employee Type")]),
-                          _vm._v(" "),
-                          _c("a", { staticClass: "float-right" }, [
-                            _vm._v(_vm._s(empdata.emp_employment_details))
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _vm._m(1, true),
-                        _vm._v(" "),
-                        _vm._m(2, true),
-                        _vm._v(" "),
-                        _vm._m(3, true),
-                        _vm._v(" "),
-                        _vm._m(4, true),
-                        _vm._v(" "),
-                        _vm._m(5, true),
-                        _vm._v(" "),
-                        _vm._m(6, true),
-                        _vm._v(" "),
-                        _vm._m(7, true),
-                        _vm._v(" "),
-                        _vm._m(8, true)
-                      ]
-                    )
-                  }),
-                  _vm._v(" "),
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-success btn-block",
-                      attrs: {
-                        type: "button",
-                        "data-toggle": "modal",
-                        "data-target": "#EditMainProfile"
-                      }
-                    },
-                    [
-                      _vm._v(
-                        "\n                        Edit\n                    "
-                      )
-                    ]
+              _c("div", { staticClass: "card-body box-profile" }, [
+                _c("div", { staticClass: "text-center" }),
+                _vm._v(" "),
+                _c("h3", { staticClass: "profile-username text-center" }, [
+                  _vm._v(
+                    "\n                        " +
+                      _vm._s(this.users.fullname) +
+                      "\n                    "
                   )
-                ],
-                2
-              )
+                ]),
+                _vm._v(" "),
+                _c("p", { staticClass: "text-muted text-center" }),
+                _vm._v(" "),
+                _c(
+                  "ul",
+                  { staticClass: "list-group list-group-unbordered mb-3" },
+                  [
+                    _c("li", { staticClass: "list-group-item" }, [
+                      _c("b", [_vm._v("Employee No.")]),
+                      _vm._v(" "),
+                      _c("a", { staticClass: "float-right" }, [
+                        _vm._v(_vm._s(this.users.employee_id))
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("li", { staticClass: "list-group-item" }, [
+                      _c("b", [_vm._v("Birthday")]),
+                      _vm._v(" "),
+                      _c("a", { staticClass: "float-right" }, [
+                        _vm._v(_vm._s(this.users.birthday))
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("li", { staticClass: "list-group-item" }, [
+                      _c("b", [_vm._v("Employee Type")]),
+                      _vm._v(" "),
+                      _c("a", { staticClass: "float-right" }, [
+                        _vm._v(
+                          _vm._s(this.users.emp_details.emp_type.employee_type)
+                        )
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("li", { staticClass: "list-group-item" }, [
+                      _c("b", [_vm._v("Place of Birth")]),
+                      _vm._v(" "),
+                      _c("a", { staticClass: "float-right" }, [
+                        _vm._v(_vm._s(this.users.place_of_birth))
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("li", { staticClass: "list-group-item" }, [
+                      _c("b", [_vm._v("Sex")]),
+                      _vm._v(" "),
+                      _c("a", { staticClass: "float-right" }, [
+                        _vm._v(_vm._s(this.users.emp_sex.sex))
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("li", { staticClass: "list-group-item" }, [
+                      _c("b", [_vm._v("Civil Status")]),
+                      _vm._v(" "),
+                      _c("a", { staticClass: "float-right" }, [
+                        _vm._v(_vm._s(this.users.civil_status.civil_status))
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("li", { staticClass: "list-group-item" }, [
+                      _c("b", [_vm._v("Citizenship")]),
+                      _vm._v(" "),
+                      _c("a", { staticClass: "float-right" }, [
+                        _vm._v(_vm._s(this.users.citizenship.citizenship))
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("li", { staticClass: "list-group-item" }, [
+                      _c("b", [_vm._v("Height")]),
+                      _vm._v(" "),
+                      this.users.height
+                        ? _c("a", { staticClass: "float-right" }, [
+                            _vm._v(_vm._s(this.users.height))
+                          ])
+                        : _c("a", { staticClass: "float-right" }, [_vm._v("-")])
+                    ]),
+                    _vm._v(" "),
+                    _c("li", { staticClass: "list-group-item" }, [
+                      _c("b", [_vm._v("Weight")]),
+                      _vm._v(" "),
+                      this.users.weight
+                        ? _c("a", { staticClass: "float-right" }, [
+                            _vm._v(_vm._s(this.users.weight))
+                          ])
+                        : _c("a", { staticClass: "float-right" }, [_vm._v("-")])
+                    ]),
+                    _vm._v(" "),
+                    _c("li", { staticClass: "list-group-item" }, [
+                      _c("b", [_vm._v("Blood Type")]),
+                      _vm._v(" "),
+                      this.users.weight
+                        ? _c("a", { staticClass: "float-right" }, [
+                            _vm._v(_vm._s(this.users.blood_type))
+                          ])
+                        : _c("a", { staticClass: "float-right" }, [_vm._v("-")])
+                    ]),
+                    _vm._v(" "),
+                    _c("li", { staticClass: "list-group-item" }, [
+                      _c("b", [_vm._v("Contact Number")]),
+                      _vm._v(" "),
+                      _c("a", { staticClass: "float-right" }, [
+                        _vm._v(_vm._s(this.users.contact_number))
+                      ])
+                    ])
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-success btn-block",
+                    attrs: { type: "button" },
+                    on: {
+                      click: function($event) {
+                        return _vm.EditMainProfileModal(_vm.users)
+                      }
+                    }
+                  },
+                  [
+                    _vm._v(
+                      "\n                        Edit\n                    "
+                    )
+                  ]
+                )
+              ])
             ])
           ])
         ])
@@ -39240,9 +39466,14 @@ var render = function() {
     _c("div", { staticClass: "modal fade", attrs: { id: "EditMainProfile" } }, [
       _c("div", { staticClass: "modal-dialog" }, [
         _c("div", { staticClass: "modal-content" }, [
-          _vm._m(9),
+          _vm._m(1),
           _vm._v(" "),
-          _c("div", { staticClass: "modal-body" }, [_c("edit-main-profile")], 1)
+          _c(
+            "div",
+            { staticClass: "modal-body" },
+            [_c("edit-main-profile", { attrs: { userdata: _vm.users } })],
+            1
+          )
         ])
       ])
     ])
@@ -39273,86 +39504,6 @@ var staticRenderFns = [
           ])
         ])
       ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", { staticClass: "list-group-item" }, [
-      _c("b", [_vm._v("Place of Birth")]),
-      _vm._v(" "),
-      _c("a", { staticClass: "float-right" })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", { staticClass: "list-group-item" }, [
-      _c("b", [_vm._v("Sex")]),
-      _vm._v(" "),
-      _c("a", { staticClass: "float-right" })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", { staticClass: "list-group-item" }, [
-      _c("b", [_vm._v("Civil Status")]),
-      _vm._v(" "),
-      _c("a", { staticClass: "float-right" })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", { staticClass: "list-group-item" }, [
-      _c("b", [_vm._v("Citizenship")]),
-      _vm._v(" "),
-      _c("a", { staticClass: "float-right" })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", { staticClass: "list-group-item" }, [
-      _c("b", [_vm._v("Height")]),
-      _vm._v(" "),
-      _c("a", { staticClass: "float-right" })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", { staticClass: "list-group-item" }, [
-      _c("b", [_vm._v("Weight")]),
-      _vm._v(" "),
-      _c("a", { staticClass: "float-right" })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", { staticClass: "list-group-item" }, [
-      _c("b", [_vm._v("Blood Type")]),
-      _vm._v(" "),
-      _c("a", { staticClass: "float-right" })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", { staticClass: "list-group-item" }, [
-      _c("b", [_vm._v("Contact Number")]),
-      _vm._v(" "),
-      _c("a", { staticClass: "float-right" })
     ])
   },
   function() {

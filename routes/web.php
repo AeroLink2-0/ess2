@@ -26,9 +26,10 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 
 //modules
-Route::post('samp', 'PersonalInformationController@samp');
-Route::get('samp1', 'PersonalInformationController@index');
-
+Route::post('UpdateMainProfile', 'PersonalInformationController@UpdateMainProfile');
+Route::get('index', 'PersonalInformationController@index');
+Route::get('civil_status', 'PersonalInformationController@civil_status');
+Route::get('gender', 'PersonalInformationController@gender');
 
 //for view router
 Route::get('{path}', 'HomeController@index')->where('path','([A-z\d-\/_.]+)?');
