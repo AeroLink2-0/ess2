@@ -92,3 +92,23 @@
         font-family: Lato-Regular;
     }
 }
+
+.edit-modal{
+    height:70px;
+}
+
+.m-progress-bar {
+    min-height: 1em;
+    background: #c12d2d;
+    width: 5%;
+}
+.select2-container--default .select2-selection--single{
+    height:37px;
+}
+
+.multi-step .modal-footer .btn-next{
+    background-color: #28a745;
+}
+.multi-step .modal-footer .btn-prev{
+    background-color: #28a745;
+}

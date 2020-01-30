@@ -15,10 +15,27 @@ Route::get('/', function () {
     return view('auth/login');
 });
 
+Route::get('/welcome', function(){
+return view('welcome');
+});
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+
+
 //modules
-Route::prefix('/myinfo')->group(function () {
+Route::post('UpdateMainProfile', 'PersonalInformationController@UpdateMainProfile');
+Route::get('index', 'PersonalInformationController@index');
+Route::get('civil_status', 'PersonalInformationController@civil_status');
+Route::get('gender', 'PersonalInformationController@gender');
+
+//for view router
+Route::get('{path}', 'HomeController@index')->where('path','([A-z\d-\/_.]+)?');
+
+/*Route::prefix('/myinfo')->group(function () {
     Route::get('/', 'PersonalInformationController@index');
-});
+    Route::post('updatemainprofile/{employee_id}', 'PersonalInformationController@UpdateMainProfile');
+});*/
+

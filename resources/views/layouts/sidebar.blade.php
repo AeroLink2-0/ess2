@@ -2,6 +2,7 @@
 
 @section('title', 'Eden Ramoneda | Home')
             <!-- Navbar -->
+        <div id="app">
             <nav class="main-header navbar navbar-expand">
                 <!-- Left navbar links -->
                 <ul class="navbar-nav">
@@ -12,7 +13,8 @@
  
             </nav>
             <!-- /.navbar -->
-            <aside class="main-sidebar sidebar-dark-primary elevation-4">
+
+            <aside class=" main-sidebar sidebar-dark-primary elevation-4">
                 <!-- Brand Logo -->
                 <a href="index3.html" class="brand-link">
                 <img src="{{ asset('uploads/aerolink.png')}}" alt="Aerolink" class="brand-image img-circle">
@@ -40,28 +42,20 @@
                     <!-- Add icons to the links using the .nav-icon class
                         with font-awesome or any other icon font library -->
                         <li class="nav-item has-treeview menu-open">
-                            <a href="{{ url('/admin/dashboard')}}" class="nav-link">
-                                <i class="nav-icon fas fa-tachometer-alt"></i>
+                            <router-link to="/dashboard" class="nav-link">
+                                <i class="nav-icon fa fa-tachometer-alt"></i>
                                 <p>
                                     Dashboard
                                 </p>
-                            </a>
+                            </router-link>
                         </li>
                         <li class="nav-item has-treeview">
-                            <a href="{{ url('/myinfo/')}}" class="nav-link">
+                            <router-link to="/myinfo" class="nav-link">
                                 <i class="nav-icon fas fa-money"></i>
                                 <p>
                                     Personal Information 
                                 </p>
-                            </a>
-                        </li>
-                        <li class="nav-item has-treeview">
-                            <a href="{{ url('/admin/projects')}}" class="nav-link">
-                                <i class="nav-icon fas fa-money"></i>
-                                <p>
-                                    Payroll
-                                </p>
-                            </a>
+                            </router-link>
                         </li>
                         <li class="nav-item has-treeview">
                             <a href="{{ route('logout') }}" class="nav-link"
@@ -81,15 +75,5 @@
                 </div>
                 <!-- /.sidebar -->
             </aside>
-<script>
-// Add active class to the current button (highlight it)
-//var header = document.getElementById("myDIV");
-var btns = document.getElementsByClassName("nav-item");
-for (var i = 0; i < btns.length; i++) {
-  btns[i].addEventListener("click", function() {
-  var current = document.getElementsByClassName("active");
-  current[0].className = current[0].className.replace(" active", "");
-  this.className += " active";
-  });
-}
-</script>
+                <router-view></router-view>
+        </div>

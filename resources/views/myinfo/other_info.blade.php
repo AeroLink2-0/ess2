@@ -1,4 +1,5 @@
-<b>Address</b>
+<button class="btn btn-sm btn-success float-md-right" data-toggle="modal" data-target="#submitModal">Edit</button>
+<b>Address</b> 
 <div class="row">
     <div class="col-md-3 mt-4">
         <h6>House/Block/Lot No.</h6><p>{{ $myinfo->emp_address->house_block_lot_no }}</p>
@@ -150,3 +151,9 @@
         <?php echo ($myinfo->emp_family_background->incase_of_emergency) ?  $myinfo->emp_family_background->incase_of_emergency->relationship : '-' ?>
     </div>
 </div>
+
+
+         
+    <div id="submitModal" class="multi-step">
+            @include('myinfo.edit_other_info')
+    </div>

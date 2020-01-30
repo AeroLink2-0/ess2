@@ -18,11 +18,11 @@
     <!-- Styles -->
     @extends('layouts.styles')
 </head>
-<body class="hold-transition sidebar-mini layout-fixed">
-    <div id="app">
-        <main>
-            @yield('content')
-        </main>
-    </div>
+<body class="hold-transition layout-fixed sidebar-mini">
+
+    <main>
+        @yield('content')
+    </main>
+
 </body>
 </html>
