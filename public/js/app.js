@@ -2121,7 +2121,7 @@ __webpack_require__.r(__webpack_exports__);
       // Submit the form via a POST request
       this.form.post("UpdateMainProfile").then(function (_ref) {
         var data = _ref.data;
-        console.log(data);
+        console.log("hello");
       });
     },
     loadGender: function loadGender() {

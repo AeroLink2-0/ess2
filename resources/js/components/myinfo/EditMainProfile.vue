@@ -104,7 +104,7 @@ export default {
     UpdateMainProfile() {
       // Submit the form via a POST request
       this.form.post("UpdateMainProfile").then(({ data }) => {
-        console.log(data);
+        console.log("hello");
       });
     },
     loadGender(){
