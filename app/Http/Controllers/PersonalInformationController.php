@@ -13,7 +13,18 @@ class PersonalInformationController extends Controller
 {
     public function index(){
 
-        $myinfo = EmployeeBasicInformation::with('emp_details.emp_type')->with('emp_sex')->with('civil_status')->with('citizenship')->where(['employee_id' => Auth::user()->employee_id])->first();
+        $myinfo = EmployeeBasicInformation::
+         with('emp_details.emp_type')
+        ->with('emp_sex')
+        ->with('civil_status')
+        ->with('citizenship')
+        ->with('emp_address.barangay')
+        ->with('emp_address.citymun')
+        ->with('emp_address.province')
+        ->with('emp_address.region')
+        ->with('emp_educ_background.educ_level')
+        ->with('emp_educ_background.educ_level.academic_honors')
+        ->where(['employee_id' => Auth::user()->employee_id])->first();
 
         return $myinfo;
         // return view('myinfo/index',['myinfo' => $myinfo,'gender' => $gender, 'civil_status'=> $civil_status]);
@@ -55,15 +66,15 @@ class PersonalInformationController extends Controller
         $myinfo->place_of_birth = $request->place_of_birth;
         $myinfo->sex_id = $request->sex_id;
         $myinfo->civil_status_id = $request->civil_status_id;
-       // $myinfo->blood_type = $request->blood_type;
+        $myinfo->blood_type = $request->blood_type;
         $myinfo->contact_number = $request->contact_number;
         $myinfo->save();
 
         //citizenship  
-       // $emp_citizenship->citizenship = $request->citizenship;
-       // $emp_citizenship->relation = $request->relation;
-       // $emp_citizenship->country = $request->country;
-       // $emp_citizenship->save();
+        $emp_citizenship->citizenship = $request->citizenship;
+        $emp_citizenship->relation = $request->relation;
+        $emp_citizenship->country = $request->country;
+        $emp_citizenship->save();
     }
     public function civil_status(){
         $civil_status = TblCivilStatus::all();
