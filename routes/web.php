@@ -23,10 +23,9 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-
-
 //modules
 Route::post('UpdateMainProfile', 'PersonalInformationController@UpdateMainProfile');
+Route::post('UpdatePhoto', 'PersonalInformationController@UpdatePhoto');
 Route::get('index', 'PersonalInformationController@index');
 Route::get('civil_status', 'PersonalInformationController@civil_status');
 Route::get('gender', 'PersonalInformationController@gender');

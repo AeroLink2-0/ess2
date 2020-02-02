@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\TblSex;
 use App\EmployeeBasicInformation;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
 use App\TblCivilStatus;
 use App\Citizenship;
 use Auth;
@@ -15,6 +17,9 @@ class PersonalInformationController extends Controller
 
         $myinfo = EmployeeBasicInformation::
          with('emp_details.emp_type')
+        ->with('emp_details.emp_position.job_category')
+        ->with('emp_details.emp_position.department')
+        ->with('emp_details.work_experience')
         ->with('emp_sex')
         ->with('civil_status')
         ->with('citizenship')
@@ -23,7 +28,8 @@ class PersonalInformationController extends Controller
         ->with('emp_address.province')
         ->with('emp_address.region')
         ->with('emp_educ_background.educ_level')
-        ->with('emp_educ_background.educ_level.academic_honors')
+        ->with('emp_educ_background.academic_honors')
+        ->with('emp_family_background.incase_of_emergency')
         ->where(['employee_id' => Auth::user()->employee_id])->first();
 
         return $myinfo;
@@ -85,4 +91,18 @@ class PersonalInformationController extends Controller
         $gender = TblSex::all();
         return $gender;
     }
+    public function UpdatePhoto(Request $request){
+       $myinfo = EmployeeBasicInformation::where(['employee_id' => Auth::user()->employee_id])->first();
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+           $extension_image = $image->getClientOriginalExtension();
+            Storage::disk('public')->put('uploads/'.$image->getFilename().'.'.$extension_image, File::get($image));
+            $myinfo->emp_img = $image->getFilename().'.'.$extension_image;
+            $myinfo->save;
+            
+           // var_dump($image);
+        }
+        //echo "Test";
+    }
+    
 }
