@@ -22,15 +22,17 @@
                         <div class="col-md-3">
                             <div class="card card-success card-outline">
                                 <div class="card-body box-profile">
+                                    <center><img class="rounded" :src="getProfilePhoto()" height="100" width="100"></center><br>
                                 <div class="text-center">
+                                    <button class="btn btn-success btn-sm" @click="EditProfilePhoto(users)">Change</button>
                                 </div>
 
                                 <h3 class="profile-username text-center">
                                     {{ this.users.fullname }}
                                 </h3>
 
-                                <p class="text-muted text-center">
-                                
+                                <p class="text-center">
+                                    {{this.users.emp_details.emp_position.position}}
                                 </p>
 
                                 <ul  class="list-group list-group-unbordered mb-3">
@@ -121,6 +123,22 @@
                     </div>
                 </div>
             </div>
+            
+              <div class="modal fade" id="UpdatePhotoModal">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Upload Photo</h4>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+
+                        <div class="modal-body">
+                            <upload-photo-modal></upload-photo-modal>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
 </template>
 
@@ -130,7 +148,8 @@
                 return {
                    users: {
                        emp_details : {
-                           emp_type: {}
+                           emp_type: {},
+                            emp_position: {},
                        },
                        emp_sex : {
                            sex: {}
@@ -145,9 +164,15 @@
                 }
             },
           methods: {
+           getProfilePhoto(){
+               return "uploads/" + this.users.emp_img;
+           },
            EditMainProfileModal(employee_data){
-              this.users.place_of_birth = employee_data.place_of_birth;
+            //  this.users.place_of_birth = employee_data.place_of_birth;
                $("#EditMainProfile").modal('show');
+           },
+            EditProfilePhoto(employee_data){
+               $("#UpdatePhotoModal").modal('show');
            },
            loadEmployeeData(){
                axios.get('index').catch(err => console.log(err)).then(data => {

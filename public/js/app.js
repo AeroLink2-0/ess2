@@ -2119,9 +2119,9 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     UpdateMainProfile: function UpdateMainProfile() {
       // Submit the form via a POST request
-      this.form.post("UpdateMainProfile").then(function (_ref) {
+      this.form.post("UpdateMainProfile").then(function (_ref) {//  console.log("hello");
+
         var data = _ref.data;
-        console.log("hello");
       });
     },
     loadGender: function loadGender() {
@@ -2393,12 +2393,31 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       users: {
         emp_details: {
-          emp_type: {}
+          emp_type: {},
+          emp_position: {}
         },
         emp_sex: {
           sex: {}
@@ -2413,9 +2432,15 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
+    getProfilePhoto: function getProfilePhoto() {
+      return "uploads/" + this.users.emp_img;
+    },
     EditMainProfileModal: function EditMainProfileModal(employee_data) {
-      this.users.place_of_birth = employee_data.place_of_birth;
+      //  this.users.place_of_birth = employee_data.place_of_birth;
       $("#EditMainProfile").modal('show');
+    },
+    EditProfilePhoto: function EditProfilePhoto(employee_data) {
+      $("#UpdatePhotoModal").modal('show');
     },
     loadEmployeeData: function loadEmployeeData() {
       var _this = this;
@@ -2629,6 +2654,66 @@ __webpack_require__.r(__webpack_exports__);
   },
   mounted: function mounted() {
     this.loadEmpOtherInfo();
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/myinfo/UploadPhotoModal.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/myinfo/UploadPhotoModal.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      emp_img: {}
+    };
+  },
+  methods: {
+    onImageChange: function onImageChange(e) {
+      console.log(e.target.files[0]);
+      this.emp_img = e.target.files[0];
+    },
+    formSubmit: function formSubmit() {
+      var currentObj = this;
+      var config = {
+        headers: {
+          'content-type': 'multipart/form-data'
+        }
+      };
+      var formData = new FormData();
+      formData.append('image', this.emp_img);
+      /*  axios.post('UpdatePhoto', formData, config)
+        .then(function (response) {
+            currentObj.success = response.data.success;
+        })
+        .catch(function (error) {
+            currentObj.output = error;
+        });*/
+
+      axios.post('UpdatePhoto', formData, config).then(function (res) {
+        console.log(res.data);
+      })["catch"](function (err) {
+        console.log(err);
+      }); //console.log(formData.append('image', this.image));
+    },
+    profilePhoto: function profilePhoto() {
+      return "uploads/eden.jpg";
+    }
   }
 });
 
@@ -39797,139 +39882,183 @@ var render = function() {
         _c("div", { staticClass: "row" }, [
           _c("div", { staticClass: "col-md-3" }, [
             _c("div", { staticClass: "card card-success card-outline" }, [
-              _c("div", { staticClass: "card-body box-profile" }, [
-                _c("div", { staticClass: "text-center" }),
-                _vm._v(" "),
-                _c("h3", { staticClass: "profile-username text-center" }, [
-                  _vm._v(
-                    "\n                            " +
-                      _vm._s(this.users.fullname) +
-                      "\n                        "
-                  )
-                ]),
-                _vm._v(" "),
-                _c("p", { staticClass: "text-muted text-center" }),
-                _vm._v(" "),
-                _c(
-                  "ul",
-                  { staticClass: "list-group list-group-unbordered mb-3" },
-                  [
-                    _c("li", { staticClass: "list-group-item" }, [
-                      _c("b", [_vm._v("Employee No.")]),
-                      _vm._v(" "),
-                      _c("a", { staticClass: "float-right" }, [
-                        _vm._v(_vm._s(this.users.employee_id))
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("li", { staticClass: "list-group-item" }, [
-                      _c("b", [_vm._v("Birthday")]),
-                      _vm._v(" "),
-                      _c("a", { staticClass: "float-right" }, [
-                        _vm._v(_vm._s(this.users.birthday))
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("li", { staticClass: "list-group-item" }, [
-                      _c("b", [_vm._v("Employee Type")]),
-                      _vm._v(" "),
-                      _c("a", { staticClass: "float-right" }, [
-                        _vm._v(
-                          _vm._s(this.users.emp_details.emp_type.employee_type)
-                        )
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("li", { staticClass: "list-group-item" }, [
-                      _c("b", [_vm._v("Place of Birth")]),
-                      _vm._v(" "),
-                      _c("a", { staticClass: "float-right" }, [
-                        _vm._v(_vm._s(this.users.place_of_birth))
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("li", { staticClass: "list-group-item" }, [
-                      _c("b", [_vm._v("Sex")]),
-                      _vm._v(" "),
-                      _c("a", { staticClass: "float-right" }, [
-                        _vm._v(_vm._s(this.users.emp_sex.sex))
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("li", { staticClass: "list-group-item" }, [
-                      _c("b", [_vm._v("Civil Status")]),
-                      _vm._v(" "),
-                      _c("a", { staticClass: "float-right" }, [
-                        _vm._v(_vm._s(this.users.civil_status.civil_status))
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("li", { staticClass: "list-group-item" }, [
-                      _c("b", [_vm._v("Citizenship")]),
-                      _vm._v(" "),
-                      _c("a", { staticClass: "float-right" }, [
-                        _vm._v(_vm._s(this.users.citizenship.citizenship))
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("li", { staticClass: "list-group-item" }, [
-                      _c("b", [_vm._v("Height")]),
-                      _vm._v(" "),
-                      this.users.height
-                        ? _c("a", { staticClass: "float-right" }, [
-                            _vm._v(_vm._s(this.users.height))
-                          ])
-                        : _c("a", { staticClass: "float-right" }, [_vm._v("-")])
-                    ]),
-                    _vm._v(" "),
-                    _c("li", { staticClass: "list-group-item" }, [
-                      _c("b", [_vm._v("Weight")]),
-                      _vm._v(" "),
-                      this.users.weight
-                        ? _c("a", { staticClass: "float-right" }, [
-                            _vm._v(_vm._s(this.users.weight))
-                          ])
-                        : _c("a", { staticClass: "float-right" }, [_vm._v("-")])
-                    ]),
-                    _vm._v(" "),
-                    _c("li", { staticClass: "list-group-item" }, [
-                      _c("b", [_vm._v("Blood Type")]),
-                      _vm._v(" "),
-                      this.users.weight
-                        ? _c("a", { staticClass: "float-right" }, [
-                            _vm._v(_vm._s(this.users.blood_type))
-                          ])
-                        : _c("a", { staticClass: "float-right" }, [_vm._v("-")])
-                    ]),
-                    _vm._v(" "),
-                    _c("li", { staticClass: "list-group-item" }, [
-                      _c("b", [_vm._v("Contact Number")]),
-                      _vm._v(" "),
-                      _c("a", { staticClass: "float-right" }, [
-                        _vm._v(_vm._s(this.users.contact_number))
-                      ])
-                    ])
-                  ]
-                ),
-                _vm._v(" "),
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-success btn-block",
-                    attrs: { type: "button" },
-                    on: {
-                      click: function($event) {
-                        return _vm.EditMainProfileModal(_vm.users)
+              _c(
+                "div",
+                { staticClass: "card-body box-profile" },
+                [
+                  _c("center", [
+                    _c("img", {
+                      staticClass: "rounded",
+                      attrs: {
+                        src: _vm.getProfilePhoto(),
+                        height: "100",
+                        width: "100"
                       }
-                    }
-                  },
-                  [
-                    _vm._v(
-                      "\n                            Edit\n                        "
+                    })
+                  ]),
+                  _c("br"),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "text-center" }, [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-success btn-sm",
+                        on: {
+                          click: function($event) {
+                            return _vm.EditProfilePhoto(_vm.users)
+                          }
+                        }
+                      },
+                      [_vm._v("Change")]
                     )
-                  ]
-                )
-              ])
+                  ]),
+                  _vm._v(" "),
+                  _c("h3", { staticClass: "profile-username text-center" }, [
+                    _vm._v(
+                      "\n                            " +
+                        _vm._s(this.users.fullname) +
+                        "\n                        "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("p", { staticClass: "text-center" }, [
+                    _vm._v(
+                      "\n                            " +
+                        _vm._s(this.users.emp_details.emp_position.position) +
+                        "\n                        "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "ul",
+                    { staticClass: "list-group list-group-unbordered mb-3" },
+                    [
+                      _c("li", { staticClass: "list-group-item" }, [
+                        _c("b", [_vm._v("Employee No.")]),
+                        _vm._v(" "),
+                        _c("a", { staticClass: "float-right" }, [
+                          _vm._v(_vm._s(this.users.employee_id))
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("li", { staticClass: "list-group-item" }, [
+                        _c("b", [_vm._v("Birthday")]),
+                        _vm._v(" "),
+                        _c("a", { staticClass: "float-right" }, [
+                          _vm._v(_vm._s(this.users.birthday))
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("li", { staticClass: "list-group-item" }, [
+                        _c("b", [_vm._v("Employee Type")]),
+                        _vm._v(" "),
+                        _c("a", { staticClass: "float-right" }, [
+                          _vm._v(
+                            _vm._s(
+                              this.users.emp_details.emp_type.employee_type
+                            )
+                          )
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("li", { staticClass: "list-group-item" }, [
+                        _c("b", [_vm._v("Place of Birth")]),
+                        _vm._v(" "),
+                        _c("a", { staticClass: "float-right" }, [
+                          _vm._v(_vm._s(this.users.place_of_birth))
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("li", { staticClass: "list-group-item" }, [
+                        _c("b", [_vm._v("Sex")]),
+                        _vm._v(" "),
+                        _c("a", { staticClass: "float-right" }, [
+                          _vm._v(_vm._s(this.users.emp_sex.sex))
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("li", { staticClass: "list-group-item" }, [
+                        _c("b", [_vm._v("Civil Status")]),
+                        _vm._v(" "),
+                        _c("a", { staticClass: "float-right" }, [
+                          _vm._v(_vm._s(this.users.civil_status.civil_status))
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("li", { staticClass: "list-group-item" }, [
+                        _c("b", [_vm._v("Citizenship")]),
+                        _vm._v(" "),
+                        _c("a", { staticClass: "float-right" }, [
+                          _vm._v(_vm._s(this.users.citizenship.citizenship))
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("li", { staticClass: "list-group-item" }, [
+                        _c("b", [_vm._v("Height")]),
+                        _vm._v(" "),
+                        this.users.height
+                          ? _c("a", { staticClass: "float-right" }, [
+                              _vm._v(_vm._s(this.users.height))
+                            ])
+                          : _c("a", { staticClass: "float-right" }, [
+                              _vm._v("-")
+                            ])
+                      ]),
+                      _vm._v(" "),
+                      _c("li", { staticClass: "list-group-item" }, [
+                        _c("b", [_vm._v("Weight")]),
+                        _vm._v(" "),
+                        this.users.weight
+                          ? _c("a", { staticClass: "float-right" }, [
+                              _vm._v(_vm._s(this.users.weight))
+                            ])
+                          : _c("a", { staticClass: "float-right" }, [
+                              _vm._v("-")
+                            ])
+                      ]),
+                      _vm._v(" "),
+                      _c("li", { staticClass: "list-group-item" }, [
+                        _c("b", [_vm._v("Blood Type")]),
+                        _vm._v(" "),
+                        this.users.weight
+                          ? _c("a", { staticClass: "float-right" }, [
+                              _vm._v(_vm._s(this.users.blood_type))
+                            ])
+                          : _c("a", { staticClass: "float-right" }, [
+                              _vm._v("-")
+                            ])
+                      ]),
+                      _vm._v(" "),
+                      _c("li", { staticClass: "list-group-item" }, [
+                        _c("b", [_vm._v("Contact Number")]),
+                        _vm._v(" "),
+                        _c("a", { staticClass: "float-right" }, [
+                          _vm._v(_vm._s(this.users.contact_number))
+                        ])
+                      ])
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-success btn-block",
+                      attrs: { type: "button" },
+                      on: {
+                        click: function($event) {
+                          return _vm.EditMainProfileModal(_vm.users)
+                        }
+                      }
+                    },
+                    [
+                      _vm._v(
+                        "\n                            Edit\n                        "
+                      )
+                    ]
+                  )
+                ],
+                1
+              )
             ])
           ]),
           _vm._v(" "),
@@ -39976,7 +40105,26 @@ var render = function() {
           )
         ])
       ])
-    ])
+    ]),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "modal fade", attrs: { id: "UpdatePhotoModal" } },
+      [
+        _c("div", { staticClass: "modal-dialog" }, [
+          _c("div", { staticClass: "modal-content" }, [
+            _vm._m(3),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "modal-body" },
+              [_c("upload-photo-modal")],
+              1
+            )
+          ])
+        ])
+      ]
+    )
   ])
 }
 var staticRenderFns = [
@@ -40064,6 +40212,23 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "modal-header" }, [
       _c("h4", { staticClass: "modal-title" }, [_vm._v("Edit Profile")]),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: { type: "button", "data-dismiss": "modal" }
+        },
+        [_vm._v("×")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c("h4", { staticClass: "modal-title" }, [_vm._v("Upload Photo")]),
       _vm._v(" "),
       _c(
         "button",
@@ -40425,6 +40590,66 @@ var staticRenderFns = [
     ])
   }
 ]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/myinfo/UploadPhotoModal.vue?vue&type=template&id=e26bee94&":
+/*!**************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/myinfo/UploadPhotoModal.vue?vue&type=template&id=e26bee94& ***!
+  \**************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { attrs: { id: "app" } },
+    [
+      _c("center", [
+        _c("img", {
+          staticClass: "rounded",
+          attrs: { src: _vm.profilePhoto(), height: "200", width: "200" }
+        })
+      ]),
+      _c("br"),
+      _vm._v(" "),
+      _c("input", {
+        staticClass: "form-control",
+        attrs: { type: "file", name: "image" },
+        on: {
+          change: function($event) {
+            return _vm.onImageChange($event)
+          }
+        }
+      }),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-success",
+          on: {
+            click: function($event) {
+              return _vm.formSubmit()
+            }
+          }
+        },
+        [_vm._v("Submit")]
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -55511,6 +55736,7 @@ Vue.component(vform__WEBPACK_IMPORTED_MODULE_1__["AlertError"].name, vform__WEBP
 Vue.component('edit-main-profile', __webpack_require__(/*! ./components/myinfo/EditMainProfile.vue */ "./resources/js/components/myinfo/EditMainProfile.vue")["default"]);
 Vue.component('other-info', __webpack_require__(/*! ./components/myinfo/OtherInfo.vue */ "./resources/js/components/myinfo/OtherInfo.vue")["default"]);
 Vue.component('employment-details', __webpack_require__(/*! ./components/myinfo/EmploymentDetails.vue */ "./resources/js/components/myinfo/EmploymentDetails.vue")["default"]);
+Vue.component('upload-photo-modal', __webpack_require__(/*! ./components/myinfo/UploadPhotoModal.vue */ "./resources/js/components/myinfo/UploadPhotoModal.vue")["default"]);
 Vue.use(vue_router__WEBPACK_IMPORTED_MODULE_0__["default"]);
 var routes = [{
   path: '/dashboard',
@@ -56010,6 +56236,76 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_OtherInfo_vue_vue_type_template_id_a9684bd8___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_OtherInfo_vue_vue_type_template_id_a9684bd8___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/myinfo/UploadPhotoModal.vue":
+/*!*************************************************************!*\
+  !*** ./resources/js/components/myinfo/UploadPhotoModal.vue ***!
+  \*************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _UploadPhotoModal_vue_vue_type_template_id_e26bee94___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./UploadPhotoModal.vue?vue&type=template&id=e26bee94& */ "./resources/js/components/myinfo/UploadPhotoModal.vue?vue&type=template&id=e26bee94&");
+/* harmony import */ var _UploadPhotoModal_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./UploadPhotoModal.vue?vue&type=script&lang=js& */ "./resources/js/components/myinfo/UploadPhotoModal.vue?vue&type=script&lang=js&");
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _UploadPhotoModal_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _UploadPhotoModal_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _UploadPhotoModal_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _UploadPhotoModal_vue_vue_type_template_id_e26bee94___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _UploadPhotoModal_vue_vue_type_template_id_e26bee94___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/myinfo/UploadPhotoModal.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/myinfo/UploadPhotoModal.vue?vue&type=script&lang=js&":
+/*!**************************************************************************************!*\
+  !*** ./resources/js/components/myinfo/UploadPhotoModal.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_UploadPhotoModal_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./UploadPhotoModal.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/myinfo/UploadPhotoModal.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_UploadPhotoModal_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/myinfo/UploadPhotoModal.vue?vue&type=template&id=e26bee94&":
+/*!********************************************************************************************!*\
+  !*** ./resources/js/components/myinfo/UploadPhotoModal.vue?vue&type=template&id=e26bee94& ***!
+  \********************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_UploadPhotoModal_vue_vue_type_template_id_e26bee94___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./UploadPhotoModal.vue?vue&type=template&id=e26bee94& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/myinfo/UploadPhotoModal.vue?vue&type=template&id=e26bee94&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_UploadPhotoModal_vue_vue_type_template_id_e26bee94___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_UploadPhotoModal_vue_vue_type_template_id_e26bee94___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
