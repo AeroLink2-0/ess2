@@ -98,7 +98,7 @@
                                             <other-info></other-info>     
                                         </div>
                                         <div class="tab-pane" id="employment_details">
-                                            @include('myinfo.employment_details')
+                                            <employment-details></employment-details>    
                                         </div> 
                                     </div>
                                 </div>

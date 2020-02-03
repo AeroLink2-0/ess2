@@ -111,7 +111,7 @@
             </div>
             <div class="col-md-3 mt-4">
                 <b>Guardian Name</b>
-                  <p v-if="!emp_other_info.emp_family_background.guardian_name == ''">{{ emp_other_info.emp_family_background.guardian_name }}</p>
+                  <p v-if="!emp_other_info.emp_family_background.guardian == ''">{{ emp_other_info.emp_family_background.guardian}}</p>
                 <p v-else>-</p>
             </div>
             <div class="col-md-3 mt-4">

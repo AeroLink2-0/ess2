@@ -8,6 +8,7 @@ class EmpEmploymentDetails extends Model
 {
     protected $table = 'tbl_emp_employment_details';
     
+  //  protected $appends = ['dateOfHired'];
     public function date_of_hired()
     {
         return \Carbon\Carbon::parse($this->date_of_hired)->isoFormat('LL');

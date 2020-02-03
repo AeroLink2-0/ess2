@@ -15,6 +15,7 @@ Vue.component(HasError.name, HasError)
 Vue.component(AlertError.name, AlertError)
 Vue.component('edit-main-profile', require('./components/myinfo/EditMainProfile.vue').default);
 Vue.component('other-info', require('./components/myinfo/OtherInfo.vue').default);
+Vue.component('employment-details', require('./components/myinfo/EmploymentDetails.vue').default);
 
 Vue.use(VueRouter)
 

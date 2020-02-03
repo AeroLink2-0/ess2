@@ -15,6 +15,9 @@ class PersonalInformationController extends Controller
 
         $myinfo = EmployeeBasicInformation::
          with('emp_details.emp_type')
+        ->with('emp_details.emp_position.job_category')
+        ->with('emp_details.emp_position.department')
+        ->with('emp_details.work_experience')
         ->with('emp_sex')
         ->with('civil_status')
         ->with('citizenship')
