@@ -44,7 +44,7 @@
         <h5>Educational Background</h5>
         <div class="row">
             <div class="col-md-12">
-                <div class="table-responsive-sm table-borderless">          
+                <div class="table-responsive-sm">          
                     <table class="table">
                         <thead>
                             <tr>
@@ -62,9 +62,9 @@
                                 <td>{{educ_bg.name_of_school}}</td>
                                 <td>{{educ_bg.course}}</td>
                                 <td>{{educ_bg.date_from }} - {{educ_bg.date_to }}</td>
-                                <template v-if="!educ_bg.academic_honors == ''">
-                                    <td v-for="acad_honors in educ_bg.academic_honors" :key="acad_honors.educ_background_id">
-                                        {{acad_honors.honors}}
+                                <template v-if="educ_bg.academic_honors.length > 0">
+                                    <td>
+                                        {{ honors(educ_bg.academic_honors) }}
                                     </td>
                                 </template>
                                  <template v-else>
@@ -76,7 +76,72 @@
                     </table>
                 </div>
             </div>
-
+        </div><hr>
+         <h5>Family Background</h5>
+        <div class="row">
+            <div class="col-md-6 mt-4">
+                <b>Spouse Name</b>
+                <p v-if="!emp_other_info.emp_family_background.spouse_name == ''">{{emp_other_info.emp_family_background.spouse_name }}</p>
+                <p v-else>-</p>
+            </div>
+            <div class="col-md-6 mt-4">
+                <b>Spouse Occupation</b>
+                   <p v-if="!emp_other_info.emp_family_background.spouse_occupation == ''">{{ emp_other_info.emp_family_background.spouse_occupation }}</p>
+                    <p v-else>-</p>
+            </div>
+            <div class="col-md-6 mt-4">
+                <b>Father Name</b>
+                   <p v-if="!emp_other_info.emp_family_background.father_name == ''">{{ emp_other_info.emp_family_background.father_name }}</p>
+                <p v-else>-</p>
+            </div>
+            <div class="col-md-6 mt-4">
+                <b>Father Occupation</b>
+                  <p v-if="!emp_other_info.emp_family_background.father_occupation == ''">{{ emp_other_info.emp_family_background.father_occupation }}</p>
+                  <p v-else>-</p>
+            </div>
+            <div class="col-md-6 mt-4">
+                <b>Mother Name</b>
+                   <p v-if="!emp_other_info.emp_family_background.mother_name == ''">{{ emp_other_info.emp_family_background.mother_name }}</p>
+                   <p v-else>-</p>
+            </div>
+            <div class="col-md-6 mt-4">
+                <b>Mother Occupation</b>
+                 <p v-if="!emp_other_info.emp_family_background.mother_occupation == ''">{{ emp_other_info.emp_family_background.mother_occupation }}</p>
+                <p v-else>-</p>
+            </div>
+            <div class="col-md-3 mt-4">
+                <b>Guardian Name</b>
+                  <p v-if="!emp_other_info.emp_family_background.guardian_name == ''">{{ emp_other_info.emp_family_background.guardian_name }}</p>
+                <p v-else>-</p>
+            </div>
+            <div class="col-md-3 mt-4">
+                <b>Guardian Occupation</b>
+                   <p v-if="!emp_other_info.emp_family_background.guardian_occupation == ''">{{ emp_other_info.emp_family_background.guardian_occupation }}</p>
+                <p v-else>-</p>
+            </div>
+            <div class="col-md-3 mt-4">
+                <b>Guardian Contact Number</b>
+                  <p v-if="!emp_other_info.emp_family_background.guardian_cno == ''">{{ emp_other_info.emp_family_background.guardian_cno }}</p>
+                <p v-else>-</p>
+            </div>
+        </div><hr>
+        <h5>In Case of Emergency</h5>
+        <div class="row">
+            <div class="col-md-3 mt-4">
+                <b>Complete Name</b>
+                <p v-if="!emp_other_info.emp_family_background.incase_of_emergency == ''">{{ emp_other_info.emp_family_background.incase_of_emergency.complete_name}}</p>
+                <p v-else>-</p>
+            </div>
+            <div class="col-md-3 mt-4">
+                <b>Contact Number</b>
+                  <p v-if="!emp_other_info.emp_family_background.incase_of_emergency == ''">{{ emp_other_info.emp_family_background.incase_of_emergency.contact_number}}</p>
+                <p v-else>-</p>
+            </div>
+            <div class="col-md-3 mt-4">
+                <b>Relationship</b>
+                  <p v-if="!emp_other_info.emp_family_background.incase_of_emergency == ''">{{ emp_other_info.emp_family_background.incase_of_emergency.relationship}}</p>
+                <p v-else>-</p>
+            </div>
         </div>
     </div>
 </template>
@@ -92,9 +157,14 @@
                             province : {},
                             region: {},
                        },
-                       emp_educ_background: {
-                           educ_level: {},
-                           academic_honors: {}
+                       emp_educ_background: [
+                           {
+                             educ_level: {},
+                             academic_honors: {}     
+                           }
+                       ],
+                       emp_family_background: {
+                           incase_of_emergency: {}
                        }
 
                    }
@@ -104,9 +174,14 @@
            loadEmpOtherInfo(){
                axios.get('index').catch(err => console.log(err)).then(data => {
                    this.emp_other_info = data.data;
+                   //console.log(data.data);
                })
-           }
-
+           },
+            honors(data) {
+              return data.map(acad =>  {
+                  return acad.honors;
+              }).join();
+            }
         },  
         mounted() {
             this.loadEmpOtherInfo();

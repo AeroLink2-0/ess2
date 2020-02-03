@@ -23,7 +23,8 @@ class PersonalInformationController extends Controller
         ->with('emp_address.province')
         ->with('emp_address.region')
         ->with('emp_educ_background.educ_level')
-        ->with('emp_educ_background.educ_level.academic_honors')
+        ->with('emp_educ_background.academic_honors')
+        ->with('emp_family_background.incase_of_emergency')
         ->where(['employee_id' => Auth::user()->employee_id])->first();
 
         return $myinfo;

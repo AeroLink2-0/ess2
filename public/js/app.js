@@ -2420,6 +2420,71 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2430,9 +2495,12 @@ __webpack_require__.r(__webpack_exports__);
           province: {},
           region: {}
         },
-        emp_educ_background: {
+        emp_educ_background: [{
           educ_level: {},
           academic_honors: {}
+        }],
+        emp_family_background: {
+          incase_of_emergency: {}
         }
       }
     };
@@ -2444,8 +2512,13 @@ __webpack_require__.r(__webpack_exports__);
       axios.get('index')["catch"](function (err) {
         return console.log(err);
       }).then(function (data) {
-        _this.emp_other_info = data.data;
+        _this.emp_other_info = data.data; //console.log(data.data);
       });
+    },
+    honors: function honors(data) {
+      return data.map(function (acad) {
+        return acad.honors;
+      }).join();
     }
   },
   mounted: function mounted() {
@@ -39860,7 +39933,7 @@ var render = function() {
     _vm._v(" "),
     _c("div", { staticClass: "row" }, [
       _c("div", { staticClass: "col-md-12" }, [
-        _c("div", { staticClass: "table-responsive-sm table-borderless" }, [
+        _c("div", { staticClass: "table-responsive-sm" }, [
           _c("table", { staticClass: "table" }, [
             _vm._m(0),
             _vm._v(" "),
@@ -39885,20 +39958,16 @@ var render = function() {
                       )
                     ]),
                     _vm._v(" "),
-                    !educ_bg.academic_honors == ""
-                      ? _vm._l(educ_bg.academic_honors, function(acad_honors) {
-                          return _c(
-                            "td",
-                            { key: acad_honors.educ_background_id },
-                            [
-                              _vm._v(
-                                "\n                                    " +
-                                  _vm._s(acad_honors.honors) +
-                                  "\n                                "
-                              )
-                            ]
-                          )
-                        })
+                    educ_bg.academic_honors.length > 0
+                      ? [
+                          _c("td", [
+                            _vm._v(
+                              "\n                                    " +
+                                _vm._s(_vm.honors(educ_bg.academic_honors)) +
+                                "\n                                "
+                            )
+                          ])
+                        ]
                       : [_c("td", [_vm._v("-")])],
                     _vm._v(" "),
                     _c("td", [_vm._v(_vm._s(educ_bg.year_graduated))])
@@ -39910,6 +39979,177 @@ var render = function() {
             )
           ])
         ])
+      ])
+    ]),
+    _c("hr"),
+    _vm._v(" "),
+    _c("h5", [_vm._v("Family Background")]),
+    _vm._v(" "),
+    _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-md-6 mt-4" }, [
+        _c("b", [_vm._v("Spouse Name")]),
+        _vm._v(" "),
+        !_vm.emp_other_info.emp_family_background.spouse_name == ""
+          ? _c("p", [
+              _vm._v(
+                _vm._s(_vm.emp_other_info.emp_family_background.spouse_name)
+              )
+            ])
+          : _c("p", [_vm._v("-")])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-md-6 mt-4" }, [
+        _c("b", [_vm._v("Spouse Occupation")]),
+        _vm._v(" "),
+        !_vm.emp_other_info.emp_family_background.spouse_occupation == ""
+          ? _c("p", [
+              _vm._v(
+                _vm._s(
+                  _vm.emp_other_info.emp_family_background.spouse_occupation
+                )
+              )
+            ])
+          : _c("p", [_vm._v("-")])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-md-6 mt-4" }, [
+        _c("b", [_vm._v("Father Name")]),
+        _vm._v(" "),
+        !_vm.emp_other_info.emp_family_background.father_name == ""
+          ? _c("p", [
+              _vm._v(
+                _vm._s(_vm.emp_other_info.emp_family_background.father_name)
+              )
+            ])
+          : _c("p", [_vm._v("-")])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-md-6 mt-4" }, [
+        _c("b", [_vm._v("Father Occupation")]),
+        _vm._v(" "),
+        !_vm.emp_other_info.emp_family_background.father_occupation == ""
+          ? _c("p", [
+              _vm._v(
+                _vm._s(
+                  _vm.emp_other_info.emp_family_background.father_occupation
+                )
+              )
+            ])
+          : _c("p", [_vm._v("-")])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-md-6 mt-4" }, [
+        _c("b", [_vm._v("Mother Name")]),
+        _vm._v(" "),
+        !_vm.emp_other_info.emp_family_background.mother_name == ""
+          ? _c("p", [
+              _vm._v(
+                _vm._s(_vm.emp_other_info.emp_family_background.mother_name)
+              )
+            ])
+          : _c("p", [_vm._v("-")])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-md-6 mt-4" }, [
+        _c("b", [_vm._v("Mother Occupation")]),
+        _vm._v(" "),
+        !_vm.emp_other_info.emp_family_background.mother_occupation == ""
+          ? _c("p", [
+              _vm._v(
+                _vm._s(
+                  _vm.emp_other_info.emp_family_background.mother_occupation
+                )
+              )
+            ])
+          : _c("p", [_vm._v("-")])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-md-3 mt-4" }, [
+        _c("b", [_vm._v("Guardian Name")]),
+        _vm._v(" "),
+        !_vm.emp_other_info.emp_family_background.guardian_name == ""
+          ? _c("p", [
+              _vm._v(
+                _vm._s(_vm.emp_other_info.emp_family_background.guardian_name)
+              )
+            ])
+          : _c("p", [_vm._v("-")])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-md-3 mt-4" }, [
+        _c("b", [_vm._v("Guardian Occupation")]),
+        _vm._v(" "),
+        !_vm.emp_other_info.emp_family_background.guardian_occupation == ""
+          ? _c("p", [
+              _vm._v(
+                _vm._s(
+                  _vm.emp_other_info.emp_family_background.guardian_occupation
+                )
+              )
+            ])
+          : _c("p", [_vm._v("-")])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-md-3 mt-4" }, [
+        _c("b", [_vm._v("Guardian Contact Number")]),
+        _vm._v(" "),
+        !_vm.emp_other_info.emp_family_background.guardian_cno == ""
+          ? _c("p", [
+              _vm._v(
+                _vm._s(_vm.emp_other_info.emp_family_background.guardian_cno)
+              )
+            ])
+          : _c("p", [_vm._v("-")])
+      ])
+    ]),
+    _c("hr"),
+    _vm._v(" "),
+    _c("h5", [_vm._v("In Case of Emergency")]),
+    _vm._v(" "),
+    _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-md-3 mt-4" }, [
+        _c("b", [_vm._v("Complete Name")]),
+        _vm._v(" "),
+        !_vm.emp_other_info.emp_family_background.incase_of_emergency == ""
+          ? _c("p", [
+              _vm._v(
+                _vm._s(
+                  _vm.emp_other_info.emp_family_background.incase_of_emergency
+                    .complete_name
+                )
+              )
+            ])
+          : _c("p", [_vm._v("-")])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-md-3 mt-4" }, [
+        _c("b", [_vm._v("Contact Number")]),
+        _vm._v(" "),
+        !_vm.emp_other_info.emp_family_background.incase_of_emergency == ""
+          ? _c("p", [
+              _vm._v(
+                _vm._s(
+                  _vm.emp_other_info.emp_family_background.incase_of_emergency
+                    .contact_number
+                )
+              )
+            ])
+          : _c("p", [_vm._v("-")])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-md-3 mt-4" }, [
+        _c("b", [_vm._v("Relationship")]),
+        _vm._v(" "),
+        !_vm.emp_other_info.emp_family_background.incase_of_emergency == ""
+          ? _c("p", [
+              _vm._v(
+                _vm._s(
+                  _vm.emp_other_info.emp_family_background.incase_of_emergency
+                    .relationship
+                )
+              )
+            ])
+          : _c("p", [_vm._v("-")])
       ])
     ])
   ])
