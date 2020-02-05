@@ -30,6 +30,8 @@ class PersonalInformationController extends Controller
         ->with('emp_educ_background.educ_level')
         ->with('emp_educ_background.academic_honors')
         ->with('emp_family_background.incase_of_emergency')
+        ->with('emp_trainings')
+        ->with('emp_ids')
         ->where(['employee_id' => Auth::user()->employee_id])->first();
 
         return $myinfo;
@@ -95,12 +97,12 @@ class PersonalInformationController extends Controller
        $myinfo = EmployeeBasicInformation::where(['employee_id' => Auth::user()->employee_id])->first();
         if ($request->hasFile('image')) {
             $image = $request->file('image');
-           $extension_image = $image->getClientOriginalExtension();
+            $extension_image = $image->getClientOriginalExtension();
             Storage::disk('public')->put('uploads/'.$image->getFilename().'.'.$extension_image, File::get($image));
             $myinfo->emp_img = $image->getFilename().'.'.$extension_image;
-            $myinfo->save;
+             $myinfo->save();
             
-           // var_dump($image);
+           // var_dump($myinfo->emp_img);
         }
         //echo "Test";
     }
