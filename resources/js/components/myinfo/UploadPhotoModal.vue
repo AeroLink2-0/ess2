@@ -1,9 +1,10 @@
 <template>
     <div id="app">
         <center><img class="rounded" :src="profilePhoto()" height="200" width="200"></center><br>
-
-                <input type="file" name="image" class="form-control" @change="onImageChange($event)">
-                <button class="btn btn-success" @click="formSubmit()">Submit</button>
+            <form @submit.prevent="formSubmit" method="POST" enctype="multipart/form-data">
+                <input type="file" name="image" class="form-control" ref="image" @change="onImageChange($event)">
+                <button class="btn btn-success">Submit</button>
+            </form>
 
     </div>
 </template>
@@ -11,7 +12,7 @@
     export default {
         data() {
             return {
-                emp_img: {},
+                emp_img: '',
             }
         },
         methods: {
@@ -20,30 +21,20 @@
                 this.emp_img = e.target.files[0];
             },
             formSubmit() {
-
-                let currentObj = this;
  
-                const config = {
-                    headers: { 'content-type': 'multipart/form-data' }
-                }
- 
-                let formData = new FormData();
-                formData.append('image', this.emp_img);
- 
-              /*  axios.post('UpdatePhoto', formData, config)
-                .then(function (response) {
-                    currentObj.success = response.data.success;
+                let data = new FormData(); 
+                data.append('image', this.emp_img);
+                data.append('_method', 'post');
+                axios.post('UpdatePhoto',data) // change this to post )
+                .then(res =>{
+                console.log(res); 
+                }) 
+                .catch(error => 
+                {
+                    console.log(error); //             
+               // window.location.href = "/myinfo";
                 })
-                .catch(function (error) {
-                    currentObj.output = error;
-                });*/
-                axios.post('UpdatePhoto', formData, config)
-                .then(res => {
-                    console.log(res.data)
-                }).catch(err => {
-                console.log(err)
-                })
-                //console.log(formData.append('image', this.image));
+            
             },
             profilePhoto(){
                 return "uploads/eden.jpg";

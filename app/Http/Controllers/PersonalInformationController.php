@@ -95,12 +95,12 @@ class PersonalInformationController extends Controller
        $myinfo = EmployeeBasicInformation::where(['employee_id' => Auth::user()->employee_id])->first();
         if ($request->hasFile('image')) {
             $image = $request->file('image');
-           $extension_image = $image->getClientOriginalExtension();
+            $extension_image = $image->getClientOriginalExtension();
             Storage::disk('public')->put('uploads/'.$image->getFilename().'.'.$extension_image, File::get($image));
             $myinfo->emp_img = $image->getFilename().'.'.$extension_image;
-            $myinfo->save;
+             $myinfo->save();
             
-           // var_dump($image);
+           // var_dump($myinfo->emp_img);
         }
         //echo "Test";
     }
