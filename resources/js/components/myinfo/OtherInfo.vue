@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h5>Address</h5>
+        <h5>Address<button class="btn btn-success float-right" data-toggle="modal" data-target="#EditOtherInfo">Edit</button></h5>
         <div class="row">
             <div class="col-md-3 mt-4">
                 <b>House/Block/Lot No.</b><p>{{ this.emp_other_info.emp_address.house_block_lot_no }}</p>
@@ -141,6 +141,15 @@
                 <b>Relationship</b>
                   <p v-if="!emp_other_info.emp_family_background.incase_of_emergency == ''">{{ emp_other_info.emp_family_background.incase_of_emergency.relationship}}</p>
                 <p v-else>-</p>
+            </div>
+        </div>
+         <div class="modal fade" id="EditOtherInfo">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <edit-other-info></edit-other-info>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
