@@ -31,7 +31,9 @@
                 axios.post('UpdatePhoto',data) // change this to post )
                 .then(res =>{
                 console.log(res); 
+
                 window.location.href = "/myinfo";
+
                 }) 
                 .catch(error => 
                 {

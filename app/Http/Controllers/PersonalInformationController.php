@@ -30,6 +30,8 @@ class PersonalInformationController extends Controller
         ->with('emp_educ_background.educ_level')
         ->with('emp_educ_background.academic_honors')
         ->with('emp_family_background.incase_of_emergency')
+        ->with('emp_trainings')
+        ->with('emp_ids')
         ->where(['employee_id' => Auth::user()->employee_id])->first();
 
         return $myinfo;

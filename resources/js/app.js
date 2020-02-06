@@ -9,6 +9,8 @@ window.Vue = require('vue');
 
 import VueRouter from 'vue-router'
 import {Form, HasError, AlertError} from 'vform';
+import VueSweetalert2 from 'vue-sweetalert2';
+
 window.Form = Form;
 
 Vue.component(HasError.name, HasError)
@@ -16,8 +18,11 @@ Vue.component(AlertError.name, AlertError)
 Vue.component('edit-main-profile', require('./components/myinfo/EditMainProfile.vue').default);
 Vue.component('other-info', require('./components/myinfo/OtherInfo.vue').default);
 Vue.component('employment-details', require('./components/myinfo/EmploymentDetails.vue').default);
+Vue.component('trainings-seminars', require('./components/myinfo/TrainingsSeminars.vue').default);
+Vue.component('government-ids', require('./components/myinfo/GovernmentIDs.vue').default);
 Vue.component('upload-photo-modal', require('./components/myinfo/UploadPhotoModal.vue').default);
 Vue.use(VueRouter)
+Vue.use(VueSweetalert2);
 
 let routes = [
     {path: '/dashboard', component:require('./components/Dashboard.vue').default, meta: { middlewareAuth: true }},
