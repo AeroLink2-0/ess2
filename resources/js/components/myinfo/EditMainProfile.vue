@@ -104,8 +104,8 @@ export default {
     UpdateMainProfile() {
       // Submit the form via a POST request
       this.form.post("UpdateMainProfile").then(({ data }) => {
-      //  console.log("hello");
       });
+      window.location.href= "/myinfo";
     },
     loadGender(){
         axios.get('gender').catch(err => console.log(err)).then(data => {

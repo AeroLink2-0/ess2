@@ -102,6 +102,12 @@
                                         <div class="tab-pane" id="employment_details">
                                             <employment-details></employment-details>    
                                         </div> 
+                                         <div class="tab-pane" id="trainings">
+                                             <trainings-seminars></trainings-seminars>    
+                                        </div>
+                                           <div class="tab-pane" id="IDs">
+                                             <government-ids></government-ids>    
+                                        </div>
                                     </div>
                                 </div>
                             </div>
