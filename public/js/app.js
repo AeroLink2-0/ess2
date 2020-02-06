@@ -2681,10 +2681,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      emp_img: ''
+      emp_img: '',
+      emp_stored_image: {}
     };
   },
   methods: {
+    profilePhoto: function profilePhoto() {
+      return "uploads/" + this.emp_stored_image.emp_img;
+    },
     onImageChange: function onImageChange(e) {
       console.log(e.target.files[0]);
       this.emp_img = e.target.files[0];
@@ -2696,14 +2700,24 @@ __webpack_require__.r(__webpack_exports__);
       axios.post('UpdatePhoto', data) // change this to post )
       .then(function (res) {
         console.log(res);
+        window.location.href = "/myinfo";
       })["catch"](function (error) {
         console.log(error); //             
-        // window.location.href = "/myinfo";
+        // window.location.href = "/myinfo";.
       });
     },
-    profilePhoto: function profilePhoto() {
-      return "uploads/sampleimage.jpg";
+    loadEmployeeData: function loadEmployeeData() {
+      var _this = this;
+
+      axios.get('index')["catch"](function (err) {
+        return console.log(err);
+      }).then(function (data) {
+        _this.emp_stored_image = data.data;
+      });
     }
+  },
+  mounted: function mounted() {
+    this.loadEmployeeData();
   }
 });
 
