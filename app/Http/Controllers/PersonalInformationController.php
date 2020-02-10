@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\TblSex;
+use App\refregion;
+use App\refprovince;
+use App\refcitymun;
+use App\refbrgy;
 use App\EmployeeBasicInformation;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
@@ -40,8 +44,6 @@ class PersonalInformationController extends Controller
 
     public function UpdateMainProfile(Request $request){
        $myinfo = EmployeeBasicInformation::where(['employee_id' => Auth::user()->employee_id])->first();
-
-    //    $emp_citizenship = Citizenship::where(['employee_id' => Auth::user()->employee_id])->first();
         $this->validate($request, [
             'date_of_birth' => 'required',
             'place_of_birth' => 'required',
@@ -100,11 +102,24 @@ class PersonalInformationController extends Controller
             $extension_image = $image->getClientOriginalExtension();
             Storage::disk('public')->put('uploads/'.$image->getFilename().'.'.$extension_image, File::get($image));
             $myinfo->emp_img = $image->getFilename().'.'.$extension_image;
-             $myinfo->save();
-            
-           // var_dump($myinfo->emp_img);
+            $myinfo->save();
         }
-        //echo "Test";
+    }
+    public function regions(){
+        $regions = refregion::all();
+        return $regions;
+    }
+    public function provinces(){
+        $province = refprovince::all();
+        return $province;
+    }
+    public function citymun(){
+        $citymun = refcitymun::all();
+        return  $citymun;
+    }
+    public function barangays(){
+        $barangay = refbrgy::all();
+        return  $barangay;
     }
     
 }
