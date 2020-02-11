@@ -58,6 +58,14 @@
                             </router-link>
                         </li>
                         <li class="nav-item has-treeview">
+                            <router-link to="/payroll" class="nav-link">
+                                <i class="nav-icon fas fa-money"></i>
+                                <p>
+                                    Payroll 
+                                </p>
+                            </router-link>
+                        </li>
+                        <li class="nav-item has-treeview">
                             <a href="{{ route('logout') }}" class="nav-link"
                                 onclick="event.preventDefault();
                                                 document.getElementById('logout-form').submit();">

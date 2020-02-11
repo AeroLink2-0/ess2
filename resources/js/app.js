@@ -5,6 +5,7 @@
  */
 
 require('./bootstrap');
+
 window.Vue = require('vue');
 
 import VueRouter from 'vue-router'
@@ -16,6 +17,7 @@ window.Form = Form;
 
 Vue.component(HasError.name, HasError)
 Vue.component(AlertError.name, AlertError)
+Vue.component('vue-select',require("vue-select").default)
 Vue.component('edit-main-profile', require('./components/myinfo/EditMainProfile.vue').default);
 Vue.component('other-info', require('./components/myinfo/OtherInfo.vue').default);
 Vue.component('employment-details', require('./components/myinfo/EmploymentDetails.vue').default);
@@ -30,7 +32,8 @@ Vue.use(VueFormWizard);
 
 let routes = [
     {path: '/dashboard', component:require('./components/Dashboard.vue').default, meta: { middlewareAuth: true }},
-    {path: '/myinfo', component:require('./components/myinfo/MyInfo.vue').default, meta: { middlewareAuth: true }}
+    {path: '/myinfo', component:require('./components/myinfo/MyInfo.vue').default, meta: { middlewareAuth: true }},
+    {path: '/payroll', component:require('./components/payroll/Index.vue').default, meta: { middlewareAuth: true }}
 ]
 
 const router = new VueRouter({

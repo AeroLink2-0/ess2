@@ -31,14 +31,9 @@
                     <p v-else>-</p>
             </div>
             <div class="col-md-3 mt-4">
-                <h6>Region</h6>
+                <b>Region</b>
                     <p v-if="!this.emp_other_info.emp_address.region.regDesc == ''">{{ this.emp_other_info.emp_address.region.regDesc}}</p>
                     <p v-else>-</p>
-            </div>
-            <div class="col-md-3 mt-4">
-                <b>Is Your Permanent Address</b>
-                    <p v-if="this.emp_other_info.emp_address.is_permanent_address == 1">YES</p>
-                    <p v-else>No</p>
             </div>
         </div><hr>
         <h5>Educational Background</h5>
@@ -147,7 +142,7 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-body">
-                        <edit-other-info></edit-other-info>
+                        <edit-other-info v-bind:useraddress="emp_other_info"></edit-other-info>
                     </div>
                 </div>
             </div>

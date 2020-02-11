@@ -28,7 +28,7 @@
                 let data = new FormData(); 
                 data.append('image', this.emp_img);
                 data.append('_method', 'post');
-                axios.post('UpdatePhoto',data) // change this to post )
+                axios.post('UpdatePhoto',data)
                 .then(res =>{
                 console.log(res); 
 
