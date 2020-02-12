@@ -26,10 +26,13 @@
     },
     "dependencies": {
         "admin-lte": "^3.0.1",
+        "laravel-vue-datatable": "^0.5.7",
         "select2-bootstrap-theme": "0.1.0-beta.10",
         "themify-icons": "^1.0.0",
+        "v-money": "^0.8.1",
         "vform": "^1.0.1",
         "vue-form-wizard": "^0.8.4",
+        "vue-highcharts": "^0.1.0",
         "vue-router": "^3.1.3",
         "vue-select": "^3.4.0",
         "vue-select2": "^0.2.6",

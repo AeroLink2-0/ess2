@@ -2237,6 +2237,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["useraddress"],
   data: function data() {
@@ -2272,7 +2273,7 @@ __webpack_require__.r(__webpack_exports__);
       axios.get("regions")["catch"](function (err) {
         return console.log(err);
       }).then(function (data) {
-        _this.region = data.data;
+        _this.regions = data.data;
       });
     },
     loadProvinces: function loadProvinces() {
@@ -2281,7 +2282,7 @@ __webpack_require__.r(__webpack_exports__);
       axios.get("provinces")["catch"](function (err) {
         return console.log(err);
       }).then(function (data) {
-        _this2.province = data.data;
+        _this2.provinces = data.data;
       });
     },
     loadCitymun: function loadCitymun() {
@@ -2290,7 +2291,7 @@ __webpack_require__.r(__webpack_exports__);
       axios.get("citymun")["catch"](function (err) {
         return console.log(err);
       }).then(function (data) {
-        _this3.citymun = data.data;
+        _this3.citymuns = data.data;
       });
     },
     loadBarangays: function loadBarangays() {
@@ -2299,7 +2300,18 @@ __webpack_require__.r(__webpack_exports__);
       axios.get("barangays")["catch"](function (err) {
         return console.log(err);
       }).then(function (data) {
-        _this4.barangay = data.data;
+        _this4.barangays = data.data;
+      });
+    },
+    loadProvincesByRegion: function loadProvincesByRegion() {
+      axios.get('loadProvicesByRegion', {
+        params: {
+          regCode: this.useraddress.emp_address.region_id
+        }
+      }).then(function (response) {
+        console.log(response);
+      })["catch"](function (error) {
+        console.log(error);
       });
     }
   },
@@ -40736,7 +40748,7 @@ var render = function() {
                       }
                     }
                   },
-                  _vm._l(_vm.barangay, function(barangay) {
+                  _vm._l(_vm.barangays, function(barangay) {
                     return _c("option", { domProps: { value: barangay.id } }, [
                       _vm._v(_vm._s(barangay.brgyDesc))
                     ])
@@ -40889,7 +40901,7 @@ var render = function() {
               "div",
               { staticClass: "form-group" },
               [
-                _c("label", [_vm._v("City/Municipality")]),
+                _c("label", [_vm._v("Region")]),
                 _vm._v(" "),
                 _c(
                   "select",
@@ -40898,43 +40910,50 @@ var render = function() {
                       {
                         name: "model",
                         rawName: "v-model",
-                        value: _vm.form.citymun_id,
-                        expression: "form.citymun_id"
+                        value: _vm.form.region_id,
+                        expression: "form.region_id"
                       }
                     ],
                     staticClass: "form-control",
-                    class: { "is-invalid": _vm.form.errors.has("citymun_id") },
-                    attrs: { name: "citymun_id" },
+                    class: { "is-invalid": _vm.form.errors.has("region_id") },
+                    attrs: { name: "region_id" },
                     on: {
-                      change: function($event) {
-                        var $$selectedVal = Array.prototype.filter
-                          .call($event.target.options, function(o) {
-                            return o.selected
-                          })
-                          .map(function(o) {
-                            var val = "_value" in o ? o._value : o.value
-                            return val
-                          })
-                        _vm.$set(
-                          _vm.form,
-                          "citymun_id",
-                          $event.target.multiple
-                            ? $$selectedVal
-                            : $$selectedVal[0]
-                        )
-                      }
+                      change: [
+                        function($event) {
+                          var $$selectedVal = Array.prototype.filter
+                            .call($event.target.options, function(o) {
+                              return o.selected
+                            })
+                            .map(function(o) {
+                              var val = "_value" in o ? o._value : o.value
+                              return val
+                            })
+                          _vm.$set(
+                            _vm.form,
+                            "region_id",
+                            $event.target.multiple
+                              ? $$selectedVal
+                              : $$selectedVal[0]
+                          )
+                        },
+                        function($event) {
+                          return _vm.loadProvincesByRegion()
+                        }
+                      ]
                     }
                   },
-                  _vm._l(_vm.citymun, function(citymun) {
-                    return _c("option", { domProps: { value: citymun.id } }, [
-                      _vm._v(_vm._s(citymun.citymunDesc))
-                    ])
+                  _vm._l(_vm.regions, function(region) {
+                    return _c(
+                      "option",
+                      { domProps: { value: region.regCode } },
+                      [_vm._v(_vm._s(region.regDesc))]
+                    )
                   }),
                   0
                 ),
                 _vm._v(" "),
                 _c("has-error", {
-                  attrs: { form: _vm.form, field: "citymun_id" }
+                  attrs: { form: _vm.form, field: "region_id" }
                 })
               ],
               1
@@ -40982,10 +41001,12 @@ var render = function() {
                       }
                     }
                   },
-                  _vm._l(_vm.province, function(province) {
-                    return _c("option", { domProps: { value: province.id } }, [
-                      _vm._v(_vm._s(province.provDesc))
-                    ])
+                  _vm._l(_vm.provinces, function(province) {
+                    return _c(
+                      "option",
+                      { domProps: { value: province.provCode } },
+                      [_vm._v(_vm._s(province.provDesc))]
+                    )
                   }),
                   0
                 ),
@@ -41003,7 +41024,7 @@ var render = function() {
               "div",
               { staticClass: "form-group" },
               [
-                _c("label", [_vm._v("Region")]),
+                _c("label", [_vm._v("City/Municipality")]),
                 _vm._v(" "),
                 _c(
                   "select",
@@ -41012,13 +41033,13 @@ var render = function() {
                       {
                         name: "model",
                         rawName: "v-model",
-                        value: _vm.form.region_id,
-                        expression: "form.region_id"
+                        value: _vm.form.citymun_id,
+                        expression: "form.citymun_id"
                       }
                     ],
                     staticClass: "form-control",
-                    class: { "is-invalid": _vm.form.errors.has("region_id") },
-                    attrs: { name: "region_id" },
+                    class: { "is-invalid": _vm.form.errors.has("citymun_id") },
+                    attrs: { name: "citymun_id" },
                     on: {
                       change: function($event) {
                         var $$selectedVal = Array.prototype.filter
@@ -41031,7 +41052,7 @@ var render = function() {
                           })
                         _vm.$set(
                           _vm.form,
-                          "region_id",
+                          "citymun_id",
                           $event.target.multiple
                             ? $$selectedVal
                             : $$selectedVal[0]
@@ -41039,16 +41060,18 @@ var render = function() {
                       }
                     }
                   },
-                  _vm._l(_vm.region, function(region) {
-                    return _c("option", { domProps: { value: region.id } }, [
-                      _vm._v(_vm._s(region.regDesc))
-                    ])
+                  _vm._l(_vm.citymuns, function(citymun) {
+                    return _c(
+                      "option",
+                      { domProps: { value: citymun.citymunCode } },
+                      [_vm._v(_vm._s(citymun.citymunDesc))]
+                    )
                   }),
                   0
                 ),
                 _vm._v(" "),
                 _c("has-error", {
-                  attrs: { form: _vm.form, field: "region_id" }
+                  attrs: { form: _vm.form, field: "citymun_id" }
                 })
               ],
               1
@@ -42208,6 +42231,69 @@ var render = function() {
   )
 }
 var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/payroll/Index.vue?vue&type=template&id=70fe630d&":
+/*!****************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/payroll/Index.vue?vue&type=template&id=70fe630d& ***!
+  \****************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm._m(0)
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "content-wrapper" }, [
+      _c("section", { staticClass: "content-header" }, [
+        _c("div", { staticClass: "container-fluid" }, [
+          _c("div", { staticClass: "row mb-2" }, [
+            _c("div", { staticClass: "col-sm-6" }, [
+              _c("h1", [_vm._v("Payroll")])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-sm-6" }, [
+              _c("ol", { staticClass: "breadcrumb float-sm-right" }, [
+                _c("li", { staticClass: "breadcrumb-item" }, [
+                  _c("a", { attrs: { href: "#" } }, [_vm._v("Home")])
+                ]),
+                _vm._v(" "),
+                _c("li", { staticClass: "breadcrumb-item active" }, [
+                  _vm._v("Payroll")
+                ])
+              ])
+            ])
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("section", { staticClass: "content" }, [
+        _c("div", { staticClass: "container-fluid" }, [
+          _c("div", { staticClass: "row" }, [
+            _c("div", { staticClass: "col-md-12" }, [
+              _c("div", { staticClass: "card card-outline" })
+            ])
+          ])
+        ])
+      ])
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -60435,6 +60521,12 @@ var routes = [{
   meta: {
     middlewareAuth: true
   }
+}, {
+  path: '/payroll',
+  component: __webpack_require__(/*! ./components/payroll/Index.vue */ "./resources/js/components/payroll/Index.vue")["default"],
+  meta: {
+    middlewareAuth: true
+  }
 }];
 var router = new vue_router__WEBPACK_IMPORTED_MODULE_0__["default"]({
   mode: 'history',
@@ -61197,6 +61289,59 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_UploadPhotoModal_vue_vue_type_template_id_e26bee94___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_UploadPhotoModal_vue_vue_type_template_id_e26bee94___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/payroll/Index.vue":
+/*!***************************************************!*\
+  !*** ./resources/js/components/payroll/Index.vue ***!
+  \***************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Index_vue_vue_type_template_id_70fe630d___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Index.vue?vue&type=template&id=70fe630d& */ "./resources/js/components/payroll/Index.vue?vue&type=template&id=70fe630d&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+var script = {}
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__["default"])(
+  script,
+  _Index_vue_vue_type_template_id_70fe630d___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Index_vue_vue_type_template_id_70fe630d___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/payroll/Index.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/payroll/Index.vue?vue&type=template&id=70fe630d&":
+/*!**********************************************************************************!*\
+  !*** ./resources/js/components/payroll/Index.vue?vue&type=template&id=70fe630d& ***!
+  \**********************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Index_vue_vue_type_template_id_70fe630d___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./Index.vue?vue&type=template&id=70fe630d& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/payroll/Index.vue?vue&type=template&id=70fe630d&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Index_vue_vue_type_template_id_70fe630d___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Index_vue_vue_type_template_id_70fe630d___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

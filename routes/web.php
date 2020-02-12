@@ -33,6 +33,7 @@ Route::get('regions', 'PersonalInformationController@regions');
 Route::get('provinces', 'PersonalInformationController@provinces');
 Route::get('citymun', 'PersonalInformationController@citymun');
 Route::get('barangays', 'PersonalInformationController@barangays');
+Route::get('loadProvicesByRegion', 'PersonalInformationController@loadProvicesByRegion');
 //for view router
 Route::get('{path}', 'HomeController@index')->where('path','([A-z\d-\/_.]+)?');
 

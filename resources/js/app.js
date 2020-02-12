@@ -32,7 +32,8 @@ Vue.use(VueFormWizard);
 
 let routes = [
     {path: '/dashboard', component:require('./components/Dashboard.vue').default, meta: { middlewareAuth: true }},
-    {path: '/myinfo', component:require('./components/myinfo/MyInfo.vue').default, meta: { middlewareAuth: true }}
+    {path: '/myinfo', component:require('./components/myinfo/MyInfo.vue').default, meta: { middlewareAuth: true }},
+    {path: '/payroll', component:require('./components/payroll/Index.vue').default, meta: { middlewareAuth: true }}
 ]
 
 const router = new VueRouter({

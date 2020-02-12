@@ -115,11 +115,14 @@ class PersonalInformationController extends Controller
     }
     public function citymun(){
         $citymun = refcitymun::all();
-        return  $citymun;
+        return $citymun;
     }
     public function barangays(){
         $barangay = refbrgy::all();
         return  $barangay;
     }
-    
+    public function loadProvicesByRegion($regCode){
+        $province = refprovince::where(['regCode' => $regCode])->get();
+        return $province;
+    }
 }
