@@ -45,7 +45,7 @@
             <div class="col-md-12">
               <div class="form-group">
                   <label>Province</label>
-                  <select v-model="form.province_id" class="form-control" name="province_id" :class="{ 'is-invalid': form.errors.has('province_id') }">
+                  <select v-model="form.province_id" class="form-control" name="province_id" :class="{ 'is-invalid': form.errors.has('province_id') }" @change="loadCitymunByProvince()">
                       <option v-for="province in provinces" v-bind:value="province.provCode">{{ province.provDesc }}</option>
                   </select>
                   <has-error :form="form" field="province_id"></has-error>
@@ -96,7 +96,9 @@ export default {
         citymun_id: "",
         province_id: "",
         region_id: ""
-      })
+      }),
+      provinces: [],
+      citymun: [],
     };
   },
   watch: {
@@ -118,6 +120,7 @@ export default {
         .get("provinces")
         .catch(err => console.log(err))
         .then(data => {
+          console.log(data.data);
           this.provinces = data.data;
         });
     },
@@ -138,17 +141,32 @@ export default {
         });
     },
     loadProvincesByRegion(){
-          axios.get('loadProvicesByRegion', {
-            params: {
-              regCode:this.useraddress.emp_address.region_id
-            }
-        })
-        .then(function (response) {
-          console.log(response);
-        })
-        .catch(function (error) {
+        axios.get('loadProvicesByRegion/' + this.form.region_id)
+        .catch((error) => {
           console.log(error);
         })
+        .then( (response) => {
+          
+          this.provinces = response.data
+          if(this.provinces.length > 0) {
+            this.form.province_id = this.provinces[0].provCode;
+          }
+        })
+        
+    },
+      loadCitymunByProvinces(){
+        axios.get('loadCitymunByProvince/' + this.form.province_id)
+        .catch((error) => {
+          console.log(error);
+        })
+        .then( (response) => {
+          
+          this.citymun= response.data
+          if(this.citymun.length > 0) {
+            this.form.citymun_id = this.citymun[0].citymunCode;
+          }
+        })
+        
     }
   },
   mounted() {

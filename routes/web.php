@@ -33,7 +33,9 @@ Route::get('regions', 'PersonalInformationController@regions');
 Route::get('provinces', 'PersonalInformationController@provinces');
 Route::get('citymun', 'PersonalInformationController@citymun');
 Route::get('barangays', 'PersonalInformationController@barangays');
-Route::get('loadProvicesByRegion', 'PersonalInformationController@loadProvicesByRegion');
+Route::get('loadProvicesByRegion/{id}', 'PersonalInformationController@loadProvicesByRegion');
+Route::get('loadCitymunByProvince/{id}', 'PersonalInformationController@loadCitymunByProvince');
+Route::get('mypayroll','PayrollController@index');
 //for view router
 Route::get('{path}', 'HomeController@index')->where('path','([A-z\d-\/_.]+)?');
 

@@ -13,6 +13,10 @@ import {Form, HasError, AlertError} from 'vform';
 import VueSweetalert2 from 'vue-sweetalert2';
 import VueFormWizard from 'vue-form-wizard'
 import 'vue-form-wizard/dist/vue-form-wizard.min.css'
+import Vuetify from 'vuetify';
+import 'vuetify/dist/vuetify.min.css';
+
+
 window.Form = Form;
 
 Vue.component(HasError.name, HasError)
@@ -28,18 +32,18 @@ Vue.component('edit-other-info', require('./components/myinfo/EditOtherInfo.vue'
 Vue.use(VueRouter)
 Vue.use(VueSweetalert2);
 Vue.use(VueFormWizard);
-
-
+Vue.use(Vuetify);
 let routes = [
     {path: '/dashboard', component:require('./components/Dashboard.vue').default, meta: { middlewareAuth: true }},
     {path: '/myinfo', component:require('./components/myinfo/MyInfo.vue').default, meta: { middlewareAuth: true }},
-    {path: '/payroll', component:require('./components/payroll/Index.vue').default, meta: { middlewareAuth: true }}
+    {path: '/payroll', component:require('./components/payroll/Payroll.vue').default, meta: { middlewareAuth: true }}
 ]
 
 const router = new VueRouter({
     mode: 'history',
     routes //short for routes
 })
+
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -61,5 +65,6 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 
 const app = new Vue({
     el: '#app',
-    router
+    router,
+    vuetify : new Vuetify(),
 });
