@@ -152,28 +152,28 @@
 
 <script>
     export default {
-            data() {
-                return {
-                   emp_other_info: {
-                       emp_address : {
-                            barangay : {},
-                            citymun : {},
-                            province : {},
-                            region: {},
-                       },
-                       emp_educ_background: [
-                           {
-                             educ_level: {},
-                             academic_honors: {}     
-                           }
-                       ],
-                       emp_family_background: {
-                           incase_of_emergency: {}
-                       }
+        data() {
+            return {
+                emp_other_info: {
+                    emp_address : {
+                        barangay : {},
+                        citymun : {},
+                        province : {},
+                        region: {},
+                    },
+                    emp_educ_background: [
+                        {
+                            educ_level: {},
+                            academic_honors: {}     
+                        }
+                    ],
+                    emp_family_background: {
+                        incase_of_emergency: {}
+                    }
 
-                   }
                 }
-            },
+            }
+        },
           methods: {
            loadEmpOtherInfo(){
                axios.get('index').catch(err => console.log(err)).then(data => {

@@ -122,7 +122,11 @@ class PersonalInformationController extends Controller
         return  $barangay;
     }
     public function loadProvicesByRegion($regCode){
-        $province = refprovince::where(['regCode' => $regCode])->get();
+        $province = refprovince::where('regCode', $regCode)->get();
         return $province;
+    }
+    public function loadCitymunByProvince($provCode){
+        $citymun = refcitymun::where('provCode', $provCode)->get();
+        return $citymun;
     }
 }
