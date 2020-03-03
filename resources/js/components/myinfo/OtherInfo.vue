@@ -174,7 +174,7 @@
                 }
             }
         },
-          methods: {
+        methods: {
            loadEmpOtherInfo(){
                axios.get('index').catch(err => console.log(err)).then(data => {
                    this.emp_other_info = data.data;

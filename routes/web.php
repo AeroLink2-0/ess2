@@ -36,6 +36,7 @@ Route::get('barangays', 'PersonalInformationController@barangays');
 Route::get('loadProvicesByRegion/{id}', 'PersonalInformationController@loadProvicesByRegion');
 Route::get('loadCitymunByProvince/{id}', 'PersonalInformationController@loadCitymunByProvince');
 Route::get('mypayroll','PayrollController@index');
+Route::get('printPayslip/{id}','PayrollController@PrintPayslip');
 //for view router
 Route::get('{path}', 'HomeController@index')->where('path','([A-z\d-\/_.]+)?');
 

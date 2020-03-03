@@ -9,7 +9,7 @@ require('./bootstrap');
 window.Vue = require('vue');
 
 import VueRouter from 'vue-router'
-import {Form, HasError, AlertError} from 'vform';
+import { Form, HasError, AlertError } from 'vform';
 import VueSweetalert2 from 'vue-sweetalert2';
 import VueFormWizard from 'vue-form-wizard'
 import 'vue-form-wizard/dist/vue-form-wizard.min.css'
@@ -21,7 +21,7 @@ window.Form = Form;
 
 Vue.component(HasError.name, HasError)
 Vue.component(AlertError.name, AlertError)
-Vue.component('vue-select',require("vue-select").default)
+Vue.component('vue-select', require("vue-select").default)
 Vue.component('edit-main-profile', require('./components/myinfo/EditMainProfile.vue').default);
 Vue.component('other-info', require('./components/myinfo/OtherInfo.vue').default);
 Vue.component('employment-details', require('./components/myinfo/EmploymentDetails.vue').default);
@@ -34,10 +34,11 @@ Vue.use(VueSweetalert2);
 Vue.use(VueFormWizard);
 Vue.use(Vuetify);
 let routes = [
-    {path: '/dashboard', component:require('./components/Dashboard.vue').default, meta: { middlewareAuth: true }},
-    {path: '/myinfo', component:require('./components/myinfo/MyInfo.vue').default, meta: { middlewareAuth: true }},
-    {path: '/payroll', component:require('./components/payroll/Payroll.vue').default, meta: { middlewareAuth: true }}
+    { path: '/dashboard', component: require('./components/Dashboard.vue').default, meta: { middlewareAuth: true } },
+    { path: '/myinfo', component: require('./components/myinfo/MyInfo.vue').default, meta: { middlewareAuth: true } },
+    { path: '/payroll', component: require('./components/payroll/Payroll.vue').default, meta: { middlewareAuth: true } }
 ]
+
 
 const router = new VueRouter({
     mode: 'history',
@@ -66,5 +67,5 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 const app = new Vue({
     el: '#app',
     router,
-    vuetify : new Vuetify(),
+    vuetify: new Vuetify(),
 });

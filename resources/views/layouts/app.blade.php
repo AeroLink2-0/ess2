@@ -10,13 +10,13 @@
     <title>{{ config('app.name', 'Aerolink | ESS') }}</title>
     
     <!-- Scripts -->
-    @extends('layouts.scripts')
+    @include('layouts.scripts')
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
     <!-- Styles -->
-    @extends('layouts.styles')
+    @include('layouts.styles')
 </head>
 <body class="hold-transition layout-fixed sidebar-mini">
 
