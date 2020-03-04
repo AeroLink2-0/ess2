@@ -3,6 +3,8 @@
         <center><img class="rounded" :src="profilePhoto()" height="200" width="200"></center><br>
             <form @submit.prevent="formSubmit" method="POST" enctype="multipart/form-data">
                 <input type="file" name="image" class="form-control" ref="image" @change="onImageChange($event)">
+ 
+                <br>
                 <button class="btn btn-success">Submit</button>
             </form>
 
@@ -37,8 +39,7 @@
                 }) 
                 .catch(error => 
                 {
-                    console.log(error); //             
-               // window.location.href = "/myinfo";.
+                    console.log(error); //            
 
                 })
             
