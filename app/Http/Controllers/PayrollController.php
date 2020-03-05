@@ -12,6 +12,8 @@ class PayrollController extends Controller
     public function index(){
        $emp_payroll = Payroll::
        with('BasicInformation')
+       ->with('BasicInformation.emp_details.emp_position')
+       ->with('BasicInformation.emp_details.emp_position.department')
        ->where(['employee_id' => Auth::user()->employee_id])->get();
        return $emp_payroll;
     }
