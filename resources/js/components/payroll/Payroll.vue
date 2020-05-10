@@ -67,6 +67,9 @@
                     </div>
                 </div>
             </section>
+
+            <table id="payslip-table" style="display:none">
+            </table>
         </div>
     </v-app>
 </template>
@@ -137,11 +140,10 @@ export default {
             format: "a4",
             });
 
-            const rectX = 10
+            const rectX = 20
             const rectY = 70
-            const rectW = 575
+            const rectW = 550
             const rectH = 110
-            pdf.setFillColor(255,255,255,255)
             pdf.rect(rectX,rectY,rectW,rectH,'S')
             
             var img = new Image()
@@ -158,12 +160,12 @@ export default {
             pdf.setTextColor(41, 61, 61)
             pdf.setFontType("normal");
             pdf.setFont("helvetica");
-            pdf.setFontSize(13);
-            pdf.text("De Santa Tower, Rockford Hills, Los Santos",70,45);
+            pdf.setFontSize(11);
+            pdf.text("30th floor, De Santa Tower, corner Time Square, Los Santos",70,45);
             
             pdf.setFontType("normal");
             pdf.setFont("helvetica");
-            pdf.setFontSize(12);
+            pdf.setFontSize(10);
             pdf.text("Employee Number:", rectX + 5,rectY + 20);
             pdf.text("Fullname:", rectX + 5,rectY + 40);
             pdf.text("Job Title:", rectX + 5,rectY + 60);
@@ -171,12 +173,46 @@ export default {
             pdf.text("Days Worked:", rectX + 5,rectY + 100);
 
             pdf.setFontType("bold");
-            pdf.setFontSize(12);
-            pdf.text(item.employee_id, rectX * 13,rectY + 20);
-            pdf.text(item.FullName, rectX * 13,rectY + 40);
-            pdf.text(item.basic_information.emp_details.emp_position.position, rectX * 13,rectY + 60);
-            pdf.text(item.basic_information.emp_details.emp_position.department.department, rectX * 13,rectY + 80);
-            pdf.text(item.duration, rectX * 13,rectY + 100);
+            pdf.setFontSize(10);
+            pdf.text(item.employee_id, rectX * 7,rectY + 20);
+            pdf.text(item.FullName, rectX * 7,rectY + 40);
+            pdf.text(item.basic_information.emp_details.emp_position.position, rectX * 7,rectY + 60);
+            pdf.text(item.basic_information.emp_details.emp_position.department.department, rectX * 7,rectY + 80);
+            pdf.text(item.duration, rectX * 7,rectY + 100);
+
+            pdf.autoTable({ startY:rectY * 2.7})
+            pdf.autoTable({
+                head: [['Earnings', 'Deductions']],
+                body: [
+                ['Basic:                      ' + item.basic, 'Undertime:                ' + item.undertime],
+                ['Overtime:                 ' + item.overtime,'Late:                          ' + item.late],
+                ['Allowance:               ' + item.allowance, 'Absent:                      ' +  item.absent],
+                ['                                           ','SSS:                          ' +  item.sss_no],
+                ['                                           ','PAGIBIG:                  ' +  item.pag_ibig_no],
+                ['                                           ','Philhealth:                 ' +  item.philhealth_no],
+                ['                                           ','Coop:                         ' +  item.coop],
+                ['                                          ','W/hold Tax:               ' +  item.whold_tax],
+                ['                                           ','Cash Advance:          ' +  item.cash_advance],
+                ['                                           ','SSS Loan:                 ' +  item.sss_loan],
+                ['                                           ','Pagibig Loan:            ' +  item.pag_ibig_loan],
+                ['                                           ','Coop Loan:               ' +  item.coop_loan],
+                ],
+            })
+
+            var total_earnings = item.basic + item.overtime + item.allowance;
+            var total_deductions = item.undertime + item.late + item.sss_no + item.pag_ibig_no 
+            + item.philhealth_no + item.coop + item.whold_tax + item.sss_loan + item.pag_ibig_loan 
+            + item.coop_loan + item.cash_advance;
+
+            pdf.autoTable({ startY:rectY * 6.7 })
+            pdf.autoTable({
+                head: [['Total',' ']],
+                body: [
+                    ['Total Earnings:         ' + total_earnings,'Total Deductions:      ' + total_deductions],
+                    ['                                               ','NET PAY:          ' + (total_earnings - total_deductions)],
+                ],
+            })
+
             pdf.save() 
        }); 
     },

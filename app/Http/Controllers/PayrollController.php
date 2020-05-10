@@ -23,5 +23,7 @@ class PayrollController extends Controller
         where(['id' => $id])->first();
 
         return $mypayslip;
+        // $pdf = PDF::loadView('payslip');
+        // return $pdf->download('sample.pdf');
     }
 }
